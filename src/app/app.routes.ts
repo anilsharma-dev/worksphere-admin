@@ -19,7 +19,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/dashboard/pages/dashboard-home/dashboard-home.component')
             .then(m => m.DashboardHomeComponent)
-      }
+      },
+      {
+        path: 'users',
+        loadComponent: () =>
+        import('./features/users/pages/users-list/users-list.component').then(m => m.UsersListComponent)
+      } 
     ]
-  }
+  },
+  
 ];

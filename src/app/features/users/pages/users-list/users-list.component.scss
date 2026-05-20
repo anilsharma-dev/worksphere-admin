@@ -1,0 +1,27 @@
+.page-wrapper {
+  padding: 24px;
+}
+
+.page-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 24px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 380px;
+  padding: 14px 18px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  background: white;
+}
+
+.search-input:focus {
+  border-color: #2563eb;
+}
