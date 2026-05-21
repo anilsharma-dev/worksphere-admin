@@ -1,0 +1,17 @@
+<div class="messages-container">
+
+  <div
+    class="message"
+    *ngFor="let message of messages">
+
+    <div class="sender">
+      {{ message.sender }}
+    </div>
+
+    <div class="text">
+      {{ message.text }}
+    </div>
+
+  </div>
+
+</div>
