@@ -7,11 +7,10 @@ import {
 } from '../../../../core/services/chat.service';
 
 @Component({
-  selector: 'app-chat-window',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './chat-window.component.html',
-  styleUrl: './chat-window.component.scss'
+    selector: 'app-chat-window',
+    imports: [CommonModule],
+    templateUrl: './chat-window.component.html',
+    styleUrl: './chat-window.component.scss'
 })
 export class ChatWindowComponent {
 

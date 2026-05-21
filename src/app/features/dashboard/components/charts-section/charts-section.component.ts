@@ -7,11 +7,10 @@ import {
 } from 'ng-apexcharts';
 
 @Component({
-  selector: 'app-charts-section',
-  standalone: true,
-  imports: [NgApexchartsModule],
-  templateUrl: './charts-section.component.html',
-  styleUrl: './charts-section.component.scss'
+    selector: 'app-charts-section',
+    imports: [NgApexchartsModule],
+    templateUrl: './charts-section.component.html',
+    styleUrl: './charts-section.component.scss'
 })
 export class ChartsSectionComponent {
 

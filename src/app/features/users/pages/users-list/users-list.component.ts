@@ -7,15 +7,14 @@ import { UserTableComponent } from '../../components/user-table/user-table.compo
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-users-list',
-  standalone: true,
-  imports: [
-    UserTableComponent,
-    UserTableComponent,
-    ReactiveFormsModule
-],
-  templateUrl: './users-list.component.html',
-  styleUrl: './users-list.component.scss'
+    selector: 'app-users-list',
+    imports: [
+        UserTableComponent,
+        UserTableComponent,
+        ReactiveFormsModule
+    ],
+    templateUrl: './users-list.component.html',
+    styleUrl: './users-list.component.scss'
 })
 export class UsersListComponent implements OnInit {
 

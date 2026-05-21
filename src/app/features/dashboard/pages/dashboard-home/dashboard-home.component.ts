@@ -3,14 +3,13 @@ import { StatsCardComponent } from '../../components/stats-card/stats-card.compo
 import { ChartsSectionComponent } from '../../components/charts-section/charts-section.component';
 
 @Component({
-  selector: 'app-dashboard-home',
-  standalone: true,
-  imports: [
-    StatsCardComponent,
-    ChartsSectionComponent
-  ],
-  templateUrl: './dashboard-home.component.html',
-  styleUrl: './dashboard-home.component.scss'
+    selector: 'app-dashboard-home',
+    imports: [
+        StatsCardComponent,
+        ChartsSectionComponent
+    ],
+    templateUrl: './dashboard-home.component.html',
+    styleUrl: './dashboard-home.component.scss'
 })
 export class DashboardHomeComponent {
 

@@ -6,11 +6,10 @@ import {
 } from '../../../../core/services/chat.service';
 
 @Component({
-  selector: 'app-message-input',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './message-input.component.html',
-  styleUrl: './message-input.component.scss'
+    selector: 'app-message-input',
+    imports: [FormsModule],
+    templateUrl: './message-input.component.html',
+    styleUrl: './message-input.component.scss'
 })
 export class MessageInputComponent {
 
