@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 import {
   ChatService,
@@ -8,7 +8,7 @@ import {
 
 @Component({
     selector: 'app-chat-window',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './chat-window.component.html',
     styleUrl: './chat-window.component.scss'
 })
