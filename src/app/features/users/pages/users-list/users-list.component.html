@@ -10,9 +10,27 @@
     placeholder="Search users..."
     [formControl]="searchControl"
   />
+    @if(isLoading()) {
 
-  <app-user-table
-    [users]="filteredUsers">
-  </app-user-table>
+      <app-loading-spinner>
+      </app-loading-spinner>
+
+    } @else {
+
+      @if(filteredUsers.length > 0) {
+
+      <app-user-table
+        [users]="filteredUsers">
+      </app-user-table>
+
+      } @else {
+
+        <div class="empty-state">
+          No users found
+        </div>
+
+      }
+
+  }
 
 </div>

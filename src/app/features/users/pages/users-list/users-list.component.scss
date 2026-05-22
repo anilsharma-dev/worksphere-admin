@@ -25,3 +25,10 @@
 .search-input:focus {
   border-color: #2563eb;
 }
+.empty-state {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  color: #64748b;
+}

@@ -5,6 +5,9 @@ import {
   ChatService
 } from '../../../../core/services/chat.service';
 
+import { NotificationService }
+from '../../../../core/services/notification.service';
+
 @Component({
     selector: 'app-message-input',
     imports: [FormsModule],
@@ -16,7 +19,8 @@ export class MessageInputComponent {
   messageText = '';
 
   constructor(
-    private chatService: ChatService
+    private chatService: ChatService,
+     private notificationService: NotificationService
   ) {}
 
   sendMessage() {
@@ -32,6 +36,10 @@ export class MessageInputComponent {
     });
 
     this.messageText = '';
+
+    this.notificationService.success(
+      'Message sent'
+    );
   }
 
 }
