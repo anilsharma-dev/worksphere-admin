@@ -8,19 +8,36 @@
         <th>Name</th>
         <th>Email</th>
         <th>Role</th>
+        <th>Actions</th>
       </tr>
     </thead>
 
     <tbody>
 
-      @for (user of users; track user) {
-        <tr>
-          <td>{{ user.id }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
-        </tr>
-      }
+  <tr *ngFor="let user of users; let i = index">
+
+  <td>{{ i+1 }}</td>
+  <td>{{ user.name }}</td>
+  <td>{{ user.email }}</td>
+  <td>{{ user.role }}</td>
+
+  <td class="actions">
+
+    <button (click)="edit.emit(user)">
+      Edit
+    </button>
+
+    <button
+      class="delete-btn"
+      (click)="delete.emit(user.id)">
+
+      Delete
+
+    </button>
+
+  </td>
+
+</tr>
 
     </tbody>
 

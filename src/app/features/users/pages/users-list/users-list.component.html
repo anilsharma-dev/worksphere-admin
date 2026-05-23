@@ -4,6 +4,18 @@
     Users
   </h1>
 
+  <div class="top-bar">
+
+    <button
+      class="add-btn"
+      (click)="openCreateDialog()">
+
+      Add User
+
+    </button>
+
+  </div>
+
   <input
     class="search-input"
     type="text"
@@ -20,7 +32,9 @@
       @if(filteredUsers.length > 0) {
 
       <app-user-table
-        [users]="filteredUsers">
+        [users]="filteredUsers"
+        (edit)="openEditDialog($event)"
+        (delete)="deleteUser($event)">
       </app-user-table>
 
       } @else {

@@ -7,6 +7,11 @@ import { UserTableComponent } from '../../components/user-table/user-table.compo
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { signal } from '@angular/core';
 import { LoadingSpinnerComponent } from '../../../../shared/components/loading-spinner/loading-spinner.component';
+import { MatDialog, MatDialogModule }
+from '@angular/material/dialog';
+
+import { UserFormDialogComponent }
+from '../../components/user-form-dialog/user-form-dialog.component';
 
 @Component({
     selector: 'app-users-list',
@@ -14,6 +19,7 @@ import { LoadingSpinnerComponent } from '../../../../shared/components/loading-s
         UserTableComponent,
         UserTableComponent,
         ReactiveFormsModule,
+        MatDialogModule,
         LoadingSpinnerComponent
     ],
     templateUrl: './users-list.component.html',
@@ -26,8 +32,10 @@ export class UsersListComponent implements OnInit {
   filteredUsers: User[] = [];
   isLoading = signal(false);
 
+
   constructor(
-    private usersService: UsersService
+    private usersService: UsersService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -73,5 +81,80 @@ export class UsersListComponent implements OnInit {
     });
 
 }
+openCreateDialog() {
 
+  const dialogRef =
+    this.dialog.open(
+      UserFormDialogComponent
+    );
+
+  dialogRef.afterClosed()
+    .subscribe(result => {
+
+      if(result) {
+
+        this.usersService
+          .addUser(result)
+          .subscribe(() => {
+
+            this.loadUsers();
+
+          });
+
+      }
+
+    });
+
+}
+openEditDialog(user: User) {
+
+  const dialogRef =
+    this.dialog.open(
+      UserFormDialogComponent,
+      {
+        data: user
+      }
+    );
+
+  dialogRef.afterClosed()
+    .subscribe(result => {
+
+      if(result) {
+
+        this.usersService
+          .updateUser({
+            ...user,
+            ...result
+          })
+          .subscribe(() => {
+
+            this.loadUsers();
+
+          });
+
+      }
+
+    });
+
+}
+deleteUser(id: number) {
+
+  const confirmed =
+    confirm(
+      'Delete this user?'
+    );
+
+  if(!confirmed) {
+    return;
+  }
+
+  this.usersService
+    .deleteUser(id)
+    .subscribe(() => {
+
+      this.loadUsers();
+
+    });
+
+}
 }

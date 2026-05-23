@@ -1,22 +1,29 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "John Doe",
       "email": "john@example.com",
       "role": "Admin"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Sarah Smith",
       "email": "sarah@example.com",
       "role": "Manager"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "David Johnson",
       "email": "david@example.com",
       "role": "User"
+    },
+    {
+      "name": "Sanjay",
+      "email": "sanjay@gmail.com",
+      "role": "User",
+      "id": "bIQNl5YlyJE"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
