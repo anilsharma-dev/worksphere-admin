@@ -1,14 +1,16 @@
 .table-wrapper {
   background: white;
-  border-radius: 18px;
+  border-radius: 22px;
   overflow-x: auto;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+
+  box-shadow:
+    0 6px 24px rgba(15, 23, 42, 0.05);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 700px;
+  min-width: 800px;
 }
 
 thead {
@@ -17,16 +19,15 @@ thead {
 
 th {
   text-align: left;
-  padding: 18px 20px;
+  padding: 20px;
+  color: #64748b;
   font-size: 14px;
   font-weight: 600;
-  color: #475569;
 }
 
 td {
   padding: 20px;
   border-top: 1px solid #e2e8f0;
-  color: #0f172a;
   font-size: 15px;
 }
 
@@ -37,20 +38,25 @@ tbody tr {
 tbody tr:hover {
   background: #f8fafc;
 }
+
 .actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
-button {
+.actions button {
+  padding: 10px 16px;
+  border-radius: 10px;
   border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
   cursor: pointer;
+}
+
+.actions button:first-child {
   background: #2563eb;
   color: white;
 }
 
 .delete-btn {
   background: #dc2626;
+  color: white;
 }

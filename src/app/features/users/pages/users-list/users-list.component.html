@@ -1,13 +1,21 @@
 <div class="page-wrapper">
 
-  <h1 class="page-title">
-    Users
-  </h1>
+  <div class="users-header">
 
-  <div class="top-bar">
+    <div>
+
+      <h1 class="page-title">
+        Users
+      </h1>
+
+      <p class="subtitle">
+        Manage team members and permissions
+      </p>
+
+    </div>
 
     <button
-      class="add-btn"
+      class="btn-primary"
       (click)="openCreateDialog()">
 
       Add User
@@ -17,19 +25,20 @@
   </div>
 
   <input
-    class="search-input"
+    class="app-input search-input"
     type="text"
     placeholder="Search users..."
     [formControl]="searchControl"
   />
-    @if(isLoading()) {
 
-      <app-loading-spinner>
-      </app-loading-spinner>
+  @if(isLoading()) {
 
-    } @else {
+    <app-loading-spinner>
+    </app-loading-spinner>
 
-      @if(filteredUsers.length > 0) {
+  } @else {
+
+    @if(filteredUsers.length > 0) {
 
       <app-user-table
         [users]="filteredUsers"
@@ -37,13 +46,13 @@
         (delete)="deleteUser($event)">
       </app-user-table>
 
-      } @else {
+    } @else {
 
-        <div class="empty-state">
-          No users found
-        </div>
+      <div class="empty-state">
+        No users found
+      </div>
 
-      }
+    }
 
   }
 
