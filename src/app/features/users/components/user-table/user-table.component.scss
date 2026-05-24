@@ -1,16 +1,15 @@
 .table-wrapper {
   background: white;
-  border-radius: 22px;
-  overflow-x: auto;
+  border-radius: 24px;
+  overflow: hidden;
 
   box-shadow:
-    0 6px 24px rgba(15, 23, 42, 0.05);
+    0 8px 30px rgba(15, 23, 42, 0.06);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 800px;
 }
 
 thead {
@@ -20,8 +19,8 @@ thead {
 th {
   text-align: left;
   padding: 20px;
-  color: #64748b;
   font-size: 14px;
+  color: #64748b;
   font-weight: 600;
 }
 
@@ -39,16 +38,87 @@ tbody tr:hover {
   background: #f8fafc;
 }
 
+/* USER */
+
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+
+  background: #2563eb;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+}
+
+.user-name {
+  font-weight: 600;
+}
+
+.user-id {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+/* BADGES */
+
+.role-badge,
+.status-badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.manager {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.user {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.active {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.inactive {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* ACTIONS */
+
 .actions {
   display: flex;
-  gap: 12px;
+  gap: 10px;
 }
 
 .actions button {
-  padding: 10px 16px;
-  border-radius: 10px;
   border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .actions button:first-child {
@@ -59,4 +129,31 @@ tbody tr:hover {
 .delete-btn {
   background: #dc2626;
   color: white;
+}
+
+/* PAGINATION */
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px;
+
+  border-top: 1px solid #e2e8f0;
+}
+
+.pagination button {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  background: #2563eb;
+  color: white;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

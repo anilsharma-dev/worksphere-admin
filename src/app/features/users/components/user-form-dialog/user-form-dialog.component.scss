@@ -1,39 +1,38 @@
 form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  min-width: 350px;
-  padding-top: 12px;
+  gap: 22px;
+  min-width: 400px;
+  padding-top: 14px;
 }
 
-input {
-  padding: 12px 14px;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
-  font-size: 15px;
-  outline: none;
+.field {
+  display: flex;
+  flex-direction: column;
 }
 
-input:focus {
-  border-color: #2563eb;
-}
-
-button {
-  border: none;
-  background: #2563eb;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 15px;
+label {
+  font-size: 14px;
   font-weight: 600;
-  transition: background 0.2s ease;
+  margin-bottom: 8px;
+  color: #334155;
 }
 
-button:hover {
-  background: #1d4ed8;
+small {
+  color: #dc2626;
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+select {
+  background: white;
 }
 
 [mat-dialog-actions] {
   padding-top: 20px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

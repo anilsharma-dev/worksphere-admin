@@ -1,10 +1,7 @@
-import { Component, Inject } from '@angular/core';
-
 import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatDialogModule
-} from '@angular/material/dialog';
+  Component,
+  Inject
+} from '@angular/core';
 
 import {
   ReactiveFormsModule,
@@ -13,6 +10,12 @@ import {
   FormGroup
 } from '@angular/forms';
 
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialogModule
+} from '@angular/material/dialog';
+
 @Component({
   selector: 'app-user-form-dialog',
   standalone: true,
@@ -20,8 +23,11 @@ import {
     ReactiveFormsModule,
     MatDialogModule
   ],
-  templateUrl: './user-form-dialog.component.html',
-  styleUrl: './user-form-dialog.component.scss'
+  templateUrl:
+    './user-form-dialog.component.html',
+
+  styleUrl:
+    './user-form-dialog.component.scss'
 })
 export class UserFormDialogComponent {
 
@@ -60,7 +66,13 @@ export class UserFormDialogComponent {
     });
 
     if(data) {
-      this.form.patchValue(data);
+
+      this.form.patchValue({
+        name: data.name,
+        email: data.email,
+        role: data.role
+      });
+
     }
 
   }
@@ -68,7 +80,11 @@ export class UserFormDialogComponent {
   save() {
 
     if(this.form.invalid) {
+
+      this.form.markAllAsTouched();
+
       return;
+
     }
 
     this.dialogRef.close(

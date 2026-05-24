@@ -3,44 +3,145 @@
   <table>
 
     <thead>
+
       <tr>
-        <th>ID</th>
-        <th>Name</th>
+
+        <th>S.No</th>
+        <th>User</th>
         <th>Email</th>
         <th>Role</th>
+        <th>Status</th>
         <th>Actions</th>
+
       </tr>
+
     </thead>
 
     <tbody>
 
-  <tr *ngFor="let user of users; let i = index">
+      <tr *ngFor="let user of paginatedUsers;let i = index">
 
-  <td>{{ i+1 }}</td>
-  <td>{{ user.name }}</td>
-  <td>{{ user.email }}</td>
-  <td>{{ user.role }}</td>
+        <!-- USER -->
+        <td>
+          <div class="user-name">
+                {{ i+1 }}
+              </div>
+        </td>
+        <td>
 
-  <td class="actions">
+          <div class="user-cell">
 
-    <button (click)="edit.emit(user)">
-      Edit
-    </button>
+            <!-- <div class="avatar">
 
-    <button
-      class="delete-btn"
-      (click)="delete.emit(user.id)">
+              {{ user.name.charAt(0) }}
 
-      Delete
+            </div> -->
 
-    </button>
+            <div>
 
-  </td>
+              <div class="user-name">
+                {{ user.name }}
+              </div>
 
-</tr>
+              
+
+            </div>
+
+          </div>
+
+        </td>
+
+        <!-- EMAIL -->
+
+        <td>
+          {{ user.email }}
+        </td>
+
+        <!-- ROLE -->
+
+        <td>
+
+          <span
+            class="role-badge"
+            [ngClass]="user.role">
+
+            {{ user.role }}
+
+          </span>
+
+        </td>
+
+        <!-- STATUS -->
+
+        <td>
+
+          <span
+            class="status-badge"
+            [ngClass]="user.status">
+
+            {{ user.status }}
+
+          </span>
+
+        </td>
+
+        <!-- ACTIONS -->
+
+        <td>
+
+          <div class="actions">
+
+            <button
+              (click)="edit.emit(user)">
+
+              Edit
+
+            </button>
+
+            <button
+              class="delete-btn"
+              (click)="delete.emit(user.id)">
+
+              Delete
+
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
 
     </tbody>
 
   </table>
+
+  <!-- PAGINATION -->
+
+  <div class="pagination">
+
+    <button
+      [disabled]="currentPage === 1"
+      (click)="prevPage()">
+
+      Previous
+
+    </button>
+
+    <span>
+
+      Page {{ currentPage }}
+
+    </span>
+
+    <button
+      [disabled]="endIndex >= users.length"
+      (click)="nextPage()">
+
+      Next
+
+    </button>
+
+  </div>
 
 </div>

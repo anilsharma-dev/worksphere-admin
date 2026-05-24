@@ -1,28 +1,122 @@
 <h2 mat-dialog-title>
-  User Form
+
+  {{ data ? 'Edit User' : 'Add User' }}
+
 </h2>
 
 <div mat-dialog-content>
 
   <form [formGroup]="form">
 
-    <input
-      type="text"
-      placeholder="Name"
-      formControlName="name"
-    />
+    <!-- Name -->
 
-    <input
-      type="email"
-      placeholder="Email"
-      formControlName="email"
-    />
+    <div class="field">
 
-    <input
-      type="text"
-      placeholder="Role"
-      formControlName="role"
-    />
+      <label>
+        Name
+      </label>
+
+      <input
+        class="app-input"
+        type="text"
+        placeholder="Enter full name"
+        formControlName="name"
+      />
+
+      @if(
+        form.get('name')?.touched &&
+        form.get('name')?.invalid
+      ) {
+
+        <small>
+          Name is required
+        </small>
+
+      }
+
+    </div>
+
+    <!-- Email -->
+
+    <div class="field">
+
+      <label>
+        Email
+      </label>
+
+      <input
+        class="app-input"
+        type="email"
+        placeholder="Enter email"
+        formControlName="email"
+      />
+
+      @if(
+        form.get('email')?.touched &&
+        form.get('email')?.hasError('required')
+      ) {
+
+        <small>
+          Email is required
+        </small>
+
+      }
+
+      @if(
+        form.get('email')?.touched &&
+        form.get('email')?.hasError('email')
+      ) {
+
+        <small>
+          Enter valid email
+        </small>
+
+      }
+
+    </div>
+
+    <!-- Role -->
+
+    <div class="field">
+
+      <label>
+        Role
+      </label>
+
+      <select
+        class="app-input"
+        formControlName="role">
+
+        <option value="">
+          Select Role
+        </option>
+
+        <option value="admin">
+          Admin
+        </option>
+
+        <option value="manager">
+          Manager
+        </option>
+
+        <option value="user">
+          User
+        </option>
+
+      </select>
+
+      @if(
+        form.get('role')?.touched &&
+        form.get('role')?.invalid
+      ) {
+
+        <small>
+          Role is required
+        </small>
+
+      }
+
+    </div>
 
   </form>
 
@@ -30,8 +124,13 @@
 
 <div mat-dialog-actions>
 
-  <button (click)="save()">
-    Save
+  <button
+    class="btn-primary"
+    [disabled]="form.invalid"
+    (click)="save()">
+
+    Save User
+
   </button>
 
 </div>

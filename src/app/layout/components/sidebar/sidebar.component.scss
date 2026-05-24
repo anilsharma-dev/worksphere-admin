@@ -1,6 +1,6 @@
 .sidebar {
   width: 270px;
-  min-height: 100vh;
+  height: 100vh;
   background: #0f172a;
   color: white;
   padding: 24px 18px;
@@ -35,23 +35,34 @@
   font-weight: 700;
 }
 
-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
 nav a {
   color: #cbd5e1;
   text-decoration: none;
   padding: 14px 16px;
   border-radius: 14px;
+
   transition: 0.2s ease;
 
   font-weight: 500;
+
+  display: flex;
+  align-items: center;
 }
 
 nav a:hover {
   background: #1e293b;
   color: white;
+}
+
+.active-link {
+  background: #2563eb !important;
+  color: white !important;
+
+  box-shadow:
+    0 6px 20px rgba(37, 99, 235, 0.35);
+}
+
+.active-link {
+  background: #2563eb !important;
+  color: white !important;
 }

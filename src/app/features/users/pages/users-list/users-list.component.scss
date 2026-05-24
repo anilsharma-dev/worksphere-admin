@@ -26,3 +26,13 @@
   box-shadow:
     0 6px 24px rgba(15, 23, 42, 0.05);
 }
+:host {
+  display: block;
+  height: 100%;
+}
+
+.page-wrapper {
+  height: calc(100vh - 90px);
+
+  overflow-y: auto;
+}

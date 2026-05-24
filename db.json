@@ -4,26 +4,35 @@
       "id": "1",
       "name": "John Doe",
       "email": "john@example.com",
-      "role": "Admin"
+      "role": "admin",
+      "status": "active"
     },
     {
       "id": "2",
       "name": "Sarah Smith",
       "email": "sarah@example.com",
-      "role": "Manager"
+      "role": "manager",
+      "status": "active"
     },
     {
       "id": "3",
       "name": "David Johnson",
       "email": "david@example.com",
-      "role": "User"
+      "role": "user",
+      "status": "active"
     },
     {
+      "id": "bIQNl5YlyJE",
       "name": "Sanjay",
       "email": "sanjay@gmail.com",
-      "role": "User",
-      "id": "bIQNl5YlyJE"
+      "role": "user",
+      "status": "active"
+    },
+    {
+      "name": "Ved",
+      "email": "ved@gmail.com",
+      "role": "admin",
+      "id": "5gLVG_x7nKg"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }

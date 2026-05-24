@@ -12,20 +12,35 @@
 
   </div>
 
-  <nav>
+ <nav>
 
-    <a routerLink="/">
-      Dashboard
-    </a>
+  <a
+    routerLink="/"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{
+      exact: true
+    }">
 
-    <a routerLink="/users">
-      Users
-    </a>
+    Dashboard
 
-    <a routerLink="/chat">
-      Chat
-    </a>
+  </a>
 
-  </nav>
+  <a
+    routerLink="/users"
+    routerLinkActive="active-link">
+
+    Users
+
+  </a>
+
+  <a
+    routerLink="/chat"
+    routerLinkActive="active-link">
+
+    Chat
+
+  </a>
+
+</nav>
 
 </div>
