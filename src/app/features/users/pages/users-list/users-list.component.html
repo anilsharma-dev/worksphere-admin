@@ -13,7 +13,6 @@
       </p>
 
     </div>
-
     <button
       class="btn-primary"
       (click)="openCreateDialog()">
@@ -42,14 +41,20 @@
 
       <app-user-table
         [users]="filteredUsers"
-        (edit)="openEditDialog($event)"
-        (delete)="deleteUser($event)">
+            (edit)="openEditDialog($event)"
+            (delete)="deleteUser($event)"
+            (statusChange)="toggleStatus($event)">
       </app-user-table>
 
     } @else {
 
       <div class="empty-state">
-        No users found
+        <h3>
+          No users found
+        </h3>
+        <p>
+          Try searching with another keyword
+        </p>
       </div>
 
     }

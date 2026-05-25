@@ -12,6 +12,16 @@ from '@angular/material/dialog';
 
 import { UserFormDialogComponent }
 from '../../components/user-form-dialog/user-form-dialog.component';
+import { MatSnackBar }
+from '@angular/material/snack-bar';
+
+import { MatSnackBarModule }
+from '@angular/material/snack-bar';
+
+import {
+  debounceTime,
+  distinctUntilChanged
+} from 'rxjs';
 
 @Component({
     selector: 'app-users-list',
@@ -20,6 +30,7 @@ from '../../components/user-form-dialog/user-form-dialog.component';
         UserTableComponent,
         ReactiveFormsModule,
         MatDialogModule,
+        MatSnackBarModule,
         LoadingSpinnerComponent
     ],
     templateUrl: './users-list.component.html',
@@ -35,6 +46,7 @@ export class UsersListComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
+    private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}
 
@@ -55,18 +67,22 @@ export class UsersListComponent implements OnInit {
         this.filteredUsers = data;
 
         this.searchControl.valueChanges
-          .subscribe(value => {
+  .pipe(
+    debounceTime(400),
+    distinctUntilChanged()
+  )
+  .subscribe(value => {
 
-            this.filteredUsers =
-              this.users.filter(user =>
-                user.name
-                  .toLowerCase()
-                  .includes(
-                    value?.toLowerCase() || ''
-                  )
-              );
+          this.filteredUsers =
+            this.users.filter(user =>
 
-          });
+              user.name
+                .toLowerCase()
+                .includes(
+                  value?.toLowerCase() || ''
+                )
+            );
+        });
 
         this.isLoading.set(false);
 
@@ -98,6 +114,13 @@ openCreateDialog() {
           .subscribe(() => {
 
             this.loadUsers();
+            this.snackBar.open(
+            'User added successfully',
+            'Close',
+            {
+              duration: 3000
+            }
+          );
 
           });
 
@@ -129,6 +152,13 @@ openEditDialog(user: User) {
           .subscribe(() => {
 
             this.loadUsers();
+            this.snackBar.open(
+            'User updated successfully',
+            'Close',
+            {
+              duration: 3000
+            }
+          );
 
           });
 
@@ -153,8 +183,46 @@ deleteUser(id: number) {
     .subscribe(() => {
 
       this.loadUsers();
+            this.snackBar.open(
+        'User deleted successfully',
+        'Close',
+        {
+          duration: 3000
+        }
+      );
 
     });
 
 }
+toggleStatus(user: User) {
+
+  const updatedUser: User = {
+
+  ...user,
+
+  status:
+    user.status === 'active'
+      ? 'inactive'
+      : 'active'
+
+};
+
+  this.usersService
+    .updateUser(updatedUser)
+    .subscribe(() => {
+
+      this.loadUsers();
+
+      this.snackBar.open(
+        'Status updated',
+        'Close',
+        {
+          duration: 3000
+        }
+      );
+
+    });
+
+}
+
 }

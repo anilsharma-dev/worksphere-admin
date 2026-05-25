@@ -31,6 +31,10 @@ export class UserTableComponent {
   @Output()
   delete = new EventEmitter<number>();
 
+  @Output()
+statusChange =
+  new EventEmitter<User>();
+
   currentPage = 1;
 
   pageSize = 5;
@@ -61,7 +65,11 @@ export class UserTableComponent {
     }
 
   }
+toggleStatus(user: User) {
 
+  this.statusChange.emit(user);
+
+}
   prevPage() {
 
     if(this.currentPage > 1) {
@@ -69,5 +77,12 @@ export class UserTableComponent {
     }
 
   }
+trackByUser(
+  index: number,
+  user: User
+) {
 
+  return user.id;
+
+}
 }

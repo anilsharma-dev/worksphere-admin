@@ -19,7 +19,10 @@
 
     <tbody>
 
-      <tr *ngFor="let user of paginatedUsers;let i = index">
+      <tr *ngFor="let user of paginatedUsers;
+  let i = index;
+  trackBy: trackByUser
+">
 
         <!-- USER -->
         <td>
@@ -75,13 +78,14 @@
 
         <td>
 
-          <span
-            class="status-badge"
-            [ngClass]="user.status">
+        <button
+        class="status-badge"
+        [ngClass]="user.status"
+        (click)="toggleStatus(user)">
 
-            {{ user.status }}
+        {{ user.status }}
 
-          </span>
+      </button>
 
         </td>
 
