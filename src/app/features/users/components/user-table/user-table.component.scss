@@ -157,3 +157,10 @@ tbody tr:hover {
   opacity: 0.5;
   cursor: not-allowed;
 }
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  min-width: 900px;
+}

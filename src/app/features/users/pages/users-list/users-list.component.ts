@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import { User } from '../../../../core/models/user.model';
 import { UsersService } from '../../../../core/services/users.service';
-
 import { UserTableComponent } from '../../components/user-table/user-table.component';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { signal } from '@angular/core';
@@ -15,26 +13,29 @@ from '../../components/user-form-dialog/user-form-dialog.component';
 import { MatSnackBar }
 from '@angular/material/snack-bar';
 
-import { MatSnackBarModule }
-from '@angular/material/snack-bar';
 
 import {
   debounceTime,
   distinctUntilChanged
 } from 'rxjs';
+import {
+  ChangeDetectionStrategy
+}
+from '@angular/core';
+import { SHARED_IMPORTS } from '../../../../shared/shared-imports';
 
 @Component({
     selector: 'app-users-list',
     imports: [
         UserTableComponent,
         UserTableComponent,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatSnackBarModule,
-        LoadingSpinnerComponent
+        LoadingSpinnerComponent,
+        SHARED_IMPORTS
     ],
     templateUrl: './users-list.component.html',
-    styleUrl: './users-list.component.scss'
+    styleUrl: './users-list.component.scss',
+    changeDetection:
+    ChangeDetectionStrategy.OnPush
 })
 export class UsersListComponent implements OnInit {
 

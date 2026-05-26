@@ -2,7 +2,8 @@ form {
   display: flex;
   flex-direction: column;
   gap: 22px;
-  min-width: 400px;
+  width: 100%;
+  max-width: 420px;
   padding-top: 14px;
 }
 

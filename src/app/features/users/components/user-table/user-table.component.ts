@@ -2,7 +2,8 @@ import {
   Component,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import {
@@ -18,7 +19,9 @@ import {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './user-table.component.html',
-  styleUrl: './user-table.component.scss'
+  styleUrl: './user-table.component.scss',
+  changeDetection:
+    ChangeDetectionStrategy.OnPush
 })
 export class UserTableComponent {
 

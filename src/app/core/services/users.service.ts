@@ -3,6 +3,13 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
+import {
+  catchError
+} from 'rxjs/operators';
+
+import {
+  throwError
+} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +20,28 @@ export class UsersService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
-  }
+  getUsers() {
+
+  return this.http
+    .get<User[]>(this.apiUrl)
+    .pipe(
+
+      catchError(error => {
+
+        console.error(
+          'API Error:',
+          error
+        );
+
+        return throwError(
+          () => error
+        );
+
+      })
+
+    );
+
+    }
   
   addUser(user: User) {
   return this.http.post<User>(

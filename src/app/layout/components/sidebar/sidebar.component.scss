@@ -66,3 +66,20 @@ nav a:hover {
   background: #2563eb !important;
   color: white !important;
 }
+@media (max-width: 768px) {
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+  }
+
+  nav {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  nav a {
+    white-space: nowrap;
+  }
+
+}

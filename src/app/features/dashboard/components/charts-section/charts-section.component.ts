@@ -8,6 +8,7 @@ import {
 
 @Component({
     selector: 'app-charts-section',
+    standalone: true,
     imports: [NgApexchartsModule],
     templateUrl: './charts-section.component.html',
     styleUrl: './charts-section.component.scss'

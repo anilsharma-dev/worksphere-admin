@@ -98,3 +98,43 @@ body {
   margin-bottom: 24px;
   color: #0f172a;
 }
+img {
+  max-width: 100%;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+table {
+  width: 100%;
+}
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.page-wrapper {
+  padding: 24px;
+}
+
+@media (max-width: 768px) {
+
+  .page-wrapper {
+    padding: 16px;
+  }
+
+}
