@@ -25,13 +25,18 @@
 
   </a>
 
+@if(
+  userRole === 'admin'
+){
+
   <a
-    routerLink="/users"
-    routerLinkActive="active-link">
+    routerLink="/users">
 
     Users
 
   </a>
+
+}
 
   <a
     routerLink="/chat"

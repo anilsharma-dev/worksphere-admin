@@ -1,34 +1,101 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import {
+  Component,
+  inject
+}
+from '@angular/core';
 
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators
+}
+from '@angular/forms';
+
+import {
+  CommonModule
+}
+from '@angular/common';
 import { AuthService } from '../../../../core/services/auth.service';
 
+
+
 @Component({
-    selector: 'app-login',
-    imports: [FormsModule],
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.scss'
+  selector: 'app-login',
+
+  standalone: true,
+
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ],
+
+  templateUrl:
+    './login.component.html',
+
+  styleUrl:
+    './login.component.scss'
 })
+
 export class LoginComponent {
 
-  email = '';
-  password = '';
+  private fb =
+    inject(FormBuilder);
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  private authService =
+    inject(AuthService);
 
-  onLogin() {
+  errorMessage = '';
 
-    const success = this.authService.login(
-      this.email,
-      this.password
-    );
+  loginForm =
+    this.fb.group({
 
-    if(success) {
-      this.router.navigate(['/']);
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email
+        ]
+      ],
+
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6)
+        ]
+      ]
+
+    });
+
+  onSubmit() {
+
+    if(
+      this.loginForm.invalid
+    ) {
+
+      this.loginForm.markAllAsTouched();
+
+      return;
     }
+
+    const {
+      email,
+      password
+    } =
+      this.loginForm.getRawValue();
+
+    const success =
+      this.authService.login(
+        email!,
+        password!
+      );
+
+    if(!success) {
+
+      this.errorMessage =
+        'Invalid credentials';
+    }
+
   }
+
 }

@@ -13,5 +13,6 @@ from '@angular/router';
     styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
-
+userRole =
+  localStorage.getItem('role');
 }

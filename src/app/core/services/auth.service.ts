@@ -1,21 +1,53 @@
-import { Injectable, signal } from '@angular/core';
+import {
+  Injectable,
+  inject,
+  signal
+}
+from '@angular/core';
+
+import {
+  Router
+}
+from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
-  isLoggedIn = signal(false);
+  private router =
+    inject(Router);
 
-  login(email: string, password: string) {
+  isAuthenticated =
+    signal(
+      !!localStorage.getItem('token')
+    );
 
-    if(email && password) {
+  login(
+    email: string,
+    password: string
+  ) {
 
-      const fakeToken = 'jwt-token-123';
+    if(
+      email === 'admin@gmail.com'
+      &&
+      password === 'admin123'
+    ) {
 
-      localStorage.setItem('token', fakeToken);
+      localStorage.setItem(
+        'token',
+        'fake-jwt-token'
+      );
 
-      this.isLoggedIn.set(true);
+      localStorage.setItem(
+        'role',
+        'admin'
+      );
+
+      this.isAuthenticated.set(true);
+
+      this.router.navigate(['/']);
 
       return true;
     }
@@ -24,11 +56,21 @@ export class AuthService {
   }
 
   logout() {
+
     localStorage.removeItem('token');
-    this.isLoggedIn.set(false);
+
+    localStorage.removeItem('role');
+
+    this.isAuthenticated.set(false);
+
+    this.router.navigate(['/login']);
   }
 
-  checkAuth() {
-    return !!localStorage.getItem('token');
+  isLoggedIn() {
+
+    return !!localStorage.getItem(
+      'token'
+    );
   }
+
 }
