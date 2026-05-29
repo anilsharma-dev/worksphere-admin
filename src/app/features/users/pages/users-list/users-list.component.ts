@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { User } from '../../../../core/models/user.model';
 import { UsersService } from '../../../../core/services/users.service';
 import { UserTableComponent } from '../../components/user-table/user-table.component';
@@ -23,6 +23,8 @@ import {
 }
 from '@angular/core';
 import { SHARED_IMPORTS } from '../../../../shared/shared-imports';
+import { ToastService } from '../../../../core/services/toast.service';
+import { UsersStore } from '../../store/users.store';
 
 @Component({
     selector: 'app-users-list',
@@ -39,15 +41,25 @@ import { SHARED_IMPORTS } from '../../../../shared/shared-imports';
 })
 export class UsersListComponent implements OnInit {
 
-  users: User[] = [];
+  users_list: User[] = [];
   searchControl = new FormControl('');
   filteredUsers: User[] = [];
   isLoading = signal(false);
+  private usersStore = inject(UsersStore);
 
+users =
+  this.usersStore.users;
+
+loading =
+  this.usersStore.loading;
+
+error =
+  this.usersStore.error;
 
   constructor(
     private usersService: UsersService,
     private snackBar: MatSnackBar,
+    private toastService:ToastService,
     private dialog: MatDialog
   ) {}
 
@@ -64,7 +76,7 @@ export class UsersListComponent implements OnInit {
 
       next: (data) => {
 
-        this.users = data;
+        this.users_list = data;
         this.filteredUsers = data;
 
         this.searchControl.valueChanges
@@ -75,7 +87,7 @@ export class UsersListComponent implements OnInit {
   .subscribe(value => {
 
           this.filteredUsers =
-            this.users.filter(user =>
+            this.users_list.filter(user =>
 
               user.name
                 .toLowerCase()
@@ -115,12 +127,8 @@ openCreateDialog() {
           .subscribe(() => {
 
             this.loadUsers();
-            this.snackBar.open(
-            'User added successfully',
-            'Close',
-            {
-              duration: 3000
-            }
+        this.toastService.success(
+            'User added successfully'
           );
 
           });
@@ -153,13 +161,9 @@ openEditDialog(user: User) {
           .subscribe(() => {
 
             this.loadUsers();
-            this.snackBar.open(
-            'User updated successfully',
-            'Close',
-            {
-              duration: 3000
-            }
-          );
+            this.toastService.success(
+              'User updated successfully'
+            );
 
           });
 
@@ -184,12 +188,8 @@ deleteUser(id: number) {
     .subscribe(() => {
 
       this.loadUsers();
-            this.snackBar.open(
-        'User deleted successfully',
-        'Close',
-        {
-          duration: 3000
-        }
+      this.toastService.success(
+        'User deleted successfully'
       );
 
     });
@@ -214,12 +214,8 @@ toggleStatus(user: User) {
 
       this.loadUsers();
 
-      this.snackBar.open(
-        'Status updated',
-        'Close',
-        {
-          duration: 3000
-        }
+      this.toastService.success(
+        'Status updated'
       );
 
     });

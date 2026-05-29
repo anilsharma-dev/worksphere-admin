@@ -56,6 +56,12 @@ Routes = [
           ).then(
             m => m.UsersListComponent
           )
+      },
+      {
+        path: 'chat',
+        loadComponent: () =>
+          import('./features/chat/pages/chat-room/chat-room.component')
+            .then(m => m.ChatRoomComponent)
       }
 
     ]
