@@ -1,14 +1,17 @@
 import {
   ChangeDetectionStrategy,
-  Component
+  Component,
+  inject
 } from '@angular/core';
+import { AnalyticsChartComponent } from '../../../../shared/components/analytics-chart/analytics-chart.component';
+import { UsersStore } from '../../../users/store/users.store';
 
 @Component({
   selector: 'app-dashboard-home',
 
   standalone: true,
 
-  imports: [],
+  imports: [AnalyticsChartComponent],
 
   templateUrl:
     './dashboard-home.component.html',
@@ -22,8 +25,20 @@ import {
 
 export class DashboardHomeComponent {
 
-  activities = [
+private usersStore =
+  inject(UsersStore);
 
+totalUsers =
+  this.usersStore.totalUsers;
+
+activeUsers =
+  this.usersStore.activeUsers;
+
+  ngOnInit() {
+
+    this.usersStore.loadUsers();
+  }
+activities = [
     {
       user: 'Anil',
       action: 'created a new user'
