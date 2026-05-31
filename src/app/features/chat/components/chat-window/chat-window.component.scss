@@ -6,7 +6,7 @@
 }
 
 .message {
-  background: white;
+  background: var(--card-bg);
   padding: 14px 18px;
   border-radius: 12px;
   margin-bottom: 12px;
@@ -15,10 +15,10 @@
 
 .sender {
   font-size: 13px;
-  color: #64748b;
+  color: var(--secondary-text);
   margin-bottom: 6px;
 }
 
 .text {
-  color: #0f172a;
+  color: var(--text-color);
 }

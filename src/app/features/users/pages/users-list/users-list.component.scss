@@ -6,7 +6,7 @@
 }
 
 .subtitle {
-  color: #64748b;
+  color: var(--secondary-text);
   margin-top: -10px;
   margin-bottom: 10px;
 }
@@ -17,7 +17,7 @@
 }
 
 .empty-state {
-  background: white;
+  background: var(--card-bg);
 
   border-radius: 24px;
 
@@ -35,7 +35,7 @@
 }
 
 .empty-state p {
-  color: #64748b;
+  color: var(--secondary-text);
 }
 :host {
   display: block;

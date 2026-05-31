@@ -12,12 +12,32 @@
 
   </div>
 
-  
-<button
-  class="logout-btn"
-  (click)="logout()">
+  <div class="header-actions">
 
-  Logout
+    <button
+      class="theme-btn"
+      (click)="toggleTheme()">
 
-</button>
+      @if(isDark()) {
+
+        ☀️
+
+      } @else {
+
+        🌙
+
+      }
+
+    </button>
+
+    <button
+      class="logout-btn"
+      (click)="logout()">
+
+      Logout
+
+    </button>
+
+  </div>
+
 </div>

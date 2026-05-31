@@ -1,41 +1,83 @@
 .header {
+
   height: 90px;
-  background: white;
+
+  background: var(--card-bg);
 
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
 
   padding: 0 30px;
 
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom:
+    1px solid var(--border-color);
+
+  flex-shrink: 0;
 }
 
 .header h2 {
+
   font-size: 24px;
-  margin-bottom: 4px;
+
+  margin: 0 0 4px;
 }
 
 .header p {
-  color: #64748b;
+
+  margin: 0;
+
+  color: var(--secondary-text);
+
   font-size: 14px;
 }
-.header {
-  flex-shrink: 0;
+
+/* ACTIONS */
+
+.header-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
 }
-@media (max-width: 768px) {
 
-  .header {
-    padding: 16px;
-    height: auto;
+/* THEME BUTTON */
 
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-  }
+.theme-btn {
 
+  width: 42px;
+  height: 42px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  font-size: 18px;
+
+  background: var(--bg-color);
+
+  color: var(--text-color);
+  border-color: 1px solid black;
+
+  transition:
+    all 0.2s ease;
 }
+
+.theme-btn:hover {
+
+  transform: scale(1.05);
+}
+
+/* LOGOUT BUTTON */
+
 .logout-btn {
+
   padding: 10px 18px;
 
   border: none;
@@ -57,11 +99,39 @@
 }
 
 .logout-btn:hover {
+
   transform: translateY(-2px);
 
   background: #dc2626;
 }
 
 .logout-btn:active {
+
   transform: scale(0.98);
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+  .header {
+
+    height: auto;
+
+    padding: 16px;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 16px;
+  }
+
+  .header-actions {
+
+    width: 100%;
+
+    justify-content: flex-end;
+  }
+
 }

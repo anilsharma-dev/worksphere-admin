@@ -21,7 +21,7 @@
   width: 100%;
   max-width: 420px;
 
-  background: white;
+  background: var(--card-bg);
 
   border-radius: 28px;
 
@@ -40,7 +40,7 @@ h1 {
 p {
   margin-top: 10px;
 
-  color: #64748b;
+  color: var(--secondary-text);
 }
 
 .form-group {
@@ -103,7 +103,7 @@ button {
 
   text-align: center;
 
-  color: #64748b;
+  color: var(--secondary-text);
 
   font-size: 14px;
 }

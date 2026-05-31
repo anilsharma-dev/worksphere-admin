@@ -1,5 +1,5 @@
 .table-wrapper {
-  background: white;
+  background: var(--card-bg);
   border-radius: 24px;
   overflow: hidden;
 
@@ -10,17 +10,18 @@
 table {
   width: 100%;
   border-collapse: collapse;
+  color: var(--text-color);
 }
 
 thead {
-  background: #f8fafc;
+  background: var(--bg-color);
 }
 
 th {
   text-align: left;
   padding: 20px;
   font-size: 14px;
-  color: #64748b;
+  color: var(--secondary-text);
   font-weight: 600;
 }
 
@@ -34,9 +35,7 @@ tbody tr {
   transition: background 0.2s ease;
 }
 
-tbody tr:hover {
-  background: #f8fafc;
-}
+
 
 /* USER */
 
@@ -67,7 +66,7 @@ tbody tr:hover {
 
 .user-id {
   font-size: 13px;
-  color: #64748b;
+  color: var(--secondary-text);
   margin-top: 4px;
 }
 
