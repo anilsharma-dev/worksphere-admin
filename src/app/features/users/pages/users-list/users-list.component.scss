@@ -73,3 +73,75 @@
 
   font-weight: 500;
 }
+.export-btn {
+
+  padding: 12px 18px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #0f172a;
+
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+.users-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 16px;
+
+  margin-bottom: 24px;
+}
+
+.header-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+.sort-btn {
+
+  padding: 12px 18px;
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 12px;
+
+  background: var(--card-bg);
+
+  color: var(--text-color);
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    all 0.2s ease;
+}
+
+.sort-btn:hover {
+
+  transform: translateY(-2px);
+
+  background: var(--bg-color);
+}
+
+.sort-btn:active {
+
+  transform: scale(0.98);
+}

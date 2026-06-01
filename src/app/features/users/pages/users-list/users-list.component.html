@@ -13,15 +13,47 @@
       </p>
 
     </div>
-    <button
-      class="btn-primary"
-      (click)="openCreateDialog()">
 
-      Add User
+    <div class="header-actions">
 
-    </button>
+      <button
+        class="sort-btn"
+        (click)="toggleSort()">
+
+        Sort:
+        {{ sortDirection() }}
+
+      </button>
+
+      <button
+        class="export-btn"
+        (click)="exportUsers()">
+
+        Export CSV
+
+      </button>
+
+      <button
+        class="btn-primary"
+        (click)="openCreateDialog()">
+
+        Add User
+
+      </button>
+
+    </div>
 
   </div>
+
+  @if(error()) {
+
+    <div class="error-banner">
+
+      {{ error() }}
+
+    </div>
+
+  }
 
   <input
     class="app-input search-input"
@@ -30,31 +62,34 @@
     [formControl]="searchControl"
   />
 
-  @if(isLoading()) {
+  @if(loading()) {
 
     <app-loading-spinner>
     </app-loading-spinner>
 
   } @else {
 
-    @if(filteredUsers.length > 0) {
+    @if(filteredUsers().length > 0) {
 
       <app-user-table
-        [users]="filteredUsers"
-            (edit)="openEditDialog($event)"
-            (delete)="deleteUser($event)"
-            (statusChange)="toggleStatus($event)">
+        [users]="filteredUsers()"
+        (edit)="openEditDialog($event)"
+        (delete)="deleteUser($event)"
+        (statusChange)="toggleStatus($event)">
       </app-user-table>
 
     } @else {
 
       <div class="empty-state">
+
         <h3>
           No users found
         </h3>
+
         <p>
           Try searching with another keyword
         </p>
+
       </div>
 
     }
@@ -62,12 +97,3 @@
   }
 
 </div>
-@if(error()) {
-
-  <div class="error-banner">
-
-    {{ error() }}
-
-  </div>
-
-}

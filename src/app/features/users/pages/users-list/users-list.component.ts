@@ -1,225 +1,326 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { User } from '../../../../core/models/user.model';
-import { UsersService } from '../../../../core/services/users.service';
-import { UserTableComponent } from '../../components/user-table/user-table.component';
-import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { signal } from '@angular/core';
-import { LoadingSpinnerComponent } from '../../../../shared/components/loading-spinner/loading-spinner.component';
-import { MatDialog, MatDialogModule }
-from '@angular/material/dialog';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal
+}
+from '@angular/core';
 
-import { UserFormDialogComponent }
-from '../../components/user-form-dialog/user-form-dialog.component';
-import { MatSnackBar }
-from '@angular/material/snack-bar';
-
+import {
+  FormControl
+}
+from '@angular/forms';
 
 import {
   debounceTime,
   distinctUntilChanged
-} from 'rxjs';
-import {
-  ChangeDetectionStrategy
 }
-from '@angular/core';
-import { SHARED_IMPORTS } from '../../../../shared/shared-imports';
-import { ToastService } from '../../../../core/services/toast.service';
-import { UsersStore } from '../../store/users.store';
+from 'rxjs';
+
+import {
+  User
+}
+from '../../../../core/models/user.model';
+
+import {
+  UsersService
+}
+from '../../../../core/services/users.service';
+
+import {
+  ToastService
+}
+from '../../../../core/services/toast.service';
+
+import {
+  UserTableComponent
+}
+from '../../components/user-table/user-table.component';
+
+import {
+  LoadingSpinnerComponent
+}
+from '../../../../shared/components/loading-spinner/loading-spinner.component';
+
+import {
+  UserFormDialogComponent
+}
+from '../../components/user-form-dialog/user-form-dialog.component';
+
+import {
+  MatDialog
+}
+from '@angular/material/dialog';
+
+import {
+  SHARED_IMPORTS
+}
+from '../../../../shared/shared-imports';
+
+import {
+  UsersStore
+}
+from '../../store/users.store';
+
+import {
+  exportUsersToCSV
+}
+from '../../../../core/utils/export.util';
 
 @Component({
-    selector: 'app-users-list',
-    imports: [
-        UserTableComponent,
-        UserTableComponent,
-        LoadingSpinnerComponent,
-        SHARED_IMPORTS
-    ],
-    templateUrl: './users-list.component.html',
-    styleUrl: './users-list.component.scss',
-    changeDetection:
+  selector: 'app-users-list',
+
+  standalone: true,
+
+  imports: [
+    UserTableComponent,
+    LoadingSpinnerComponent,
+    SHARED_IMPORTS
+  ],
+
+  templateUrl:
+    './users-list.component.html',
+
+  styleUrl:
+    './users-list.component.scss',
+
+  changeDetection:
     ChangeDetectionStrategy.OnPush
 })
-export class UsersListComponent implements OnInit {
 
-  users_list: User[] = [];
-  searchControl = new FormControl('');
-  filteredUsers: User[] = [];
-  isLoading = signal(false);
-  private usersStore = inject(UsersStore);
+export class UsersListComponent
+implements OnInit {
 
-users =
-  this.usersStore.users;
+  private usersStore =
+    inject(UsersStore);
 
-loading =
-  this.usersStore.loading;
+  private usersService =
+    inject(UsersService);
 
-error =
-  this.usersStore.error;
+  private toastService =
+    inject(ToastService);
 
-  constructor(
-    private usersService: UsersService,
-    private snackBar: MatSnackBar,
-    private toastService:ToastService,
-    private dialog: MatDialog
-  ) {}
+  private dialog =
+    inject(MatDialog);
 
-  ngOnInit(): void {
-    this.loadUsers();
-  }
+  searchControl =
+    new FormControl('');
 
-  loadUsers() {
+  searchTerm =
+    signal('');
 
-  this.isLoading.set(true);
-
-  this.usersService.getUsers()
-    .subscribe({
-
-      next: (data) => {
-
-        this.users_list = data;
-        this.filteredUsers = data;
-
-        this.searchControl.valueChanges
-  .pipe(
-    debounceTime(400),
-    distinctUntilChanged()
-  )
-  .subscribe(value => {
-
-          this.filteredUsers =
-            this.users_list.filter(user =>
-
-              user.name
-                .toLowerCase()
-                .includes(
-                  value?.toLowerCase() || ''
-                )
-            );
-        });
-
-        this.isLoading.set(false);
-
-      },
-
-      error: () => {
-
-        this.isLoading.set(false);
-
-      }
-
-    });
-
-}
-openCreateDialog() {
-
-  const dialogRef =
-    this.dialog.open(
-      UserFormDialogComponent
+  sortDirection =
+    signal<'asc' | 'desc'>(
+      'asc'
     );
 
-  dialogRef.afterClosed()
-    .subscribe(result => {
+  users =
+    this.usersStore.users;
 
-      if(result) {
+  loading =
+    this.usersStore.loading;
 
-        this.usersService
-          .addUser(result)
-          .subscribe(() => {
+  error =
+    this.usersStore.error;
 
-            this.loadUsers();
-        this.toastService.success(
-            'User added successfully'
+  filteredUsers =
+    computed(() => {
+
+      const term =
+        this.searchTerm()
+          .toLowerCase();
+
+      const filtered =
+        this.users()
+          .filter(user =>
+
+            user.name
+              .toLowerCase()
+              .includes(term)
+
           );
 
-          });
+      return filtered.sort(
+        (a, b) =>
 
-      }
+          this.sortDirection()
+          === 'asc'
 
-    });
+          ? a.name.localeCompare(
+              b.name
+            )
 
-}
-openEditDialog(user: User) {
+          : b.name.localeCompare(
+              a.name
+            )
 
-  const dialogRef =
-    this.dialog.open(
-      UserFormDialogComponent,
-      {
-        data: user
-      }
-    );
-
-  dialogRef.afterClosed()
-    .subscribe(result => {
-
-      if(result) {
-
-        this.usersService
-          .updateUser({
-            ...user,
-            ...result
-          })
-          .subscribe(() => {
-
-            this.loadUsers();
-            this.toastService.success(
-              'User updated successfully'
-            );
-
-          });
-
-      }
+      );
 
     });
 
-}
-deleteUser(id: number) {
+  ngOnInit(): void {
 
-  const confirmed =
-    confirm(
-      'Delete this user?'
-    );
+    this.usersStore.loadUsers();
 
-  if(!confirmed) {
-    return;
+    this.searchControl.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged()
+      )
+      .subscribe(value => {
+
+        this.searchTerm.set(
+          value || ''
+        );
+
+      });
+
   }
 
-  this.usersService
-    .deleteUser(id)
-    .subscribe(() => {
+  openCreateDialog() {
 
-      this.loadUsers();
-      this.toastService.success(
-        'User deleted successfully'
+    const dialogRef =
+      this.dialog.open(
+        UserFormDialogComponent
       );
 
-    });
+    dialogRef.afterClosed()
+      .subscribe(result => {
 
-}
-toggleStatus(user: User) {
+        if(result) {
 
-  const updatedUser: User = {
+          this.usersService
+            .addUser(result)
+            .subscribe(() => {
 
-  ...user,
+              this.usersStore.loadUsers();
 
-  status:
-    user.status === 'active'
-      ? 'inactive'
-      : 'active'
+              this.toastService.success(
+                'User added successfully'
+              );
 
-};
+            });
 
-  this.usersService
-    .updateUser(updatedUser)
-    .subscribe(() => {
+        }
 
-      this.loadUsers();
+      });
 
-      this.toastService.success(
-        'Status updated'
+  }
+
+  openEditDialog(
+    user: User
+  ) {
+
+    const dialogRef =
+      this.dialog.open(
+        UserFormDialogComponent,
+        {
+          data: user
+        }
       );
 
-    });
+    dialogRef.afterClosed()
+      .subscribe(result => {
 
-}
+        if(result) {
+
+          this.usersService
+            .updateUser({
+              ...user,
+              ...result
+            })
+            .subscribe(() => {
+
+              this.usersStore.loadUsers();
+
+              this.toastService.success(
+                'User updated successfully'
+              );
+
+            });
+
+        }
+
+      });
+
+  }
+
+  deleteUser(
+    id: number
+  ) {
+
+    const confirmed =
+      confirm(
+        'Delete this user?'
+      );
+
+    if(!confirmed) {
+      return;
+    }
+
+    this.usersService
+      .deleteUser(id)
+      .subscribe(() => {
+
+        this.usersStore.loadUsers();
+
+        this.toastService.success(
+          'User deleted successfully'
+        );
+
+      });
+
+  }
+
+  toggleStatus(
+    user: User
+  ) {
+
+    const updatedUser: User = {
+
+      ...user,
+
+      status:
+        user.status === 'active'
+          ? 'inactive'
+          : 'active'
+
+    };
+
+    this.usersService
+      .updateUser(updatedUser)
+      .subscribe(() => {
+
+        this.usersStore.loadUsers();
+
+        this.toastService.success(
+          'Status updated'
+        );
+
+      });
+
+  }
+
+  toggleSort() {
+
+    this.sortDirection.update(
+      value =>
+
+        value === 'asc'
+        ? 'desc'
+        : 'asc'
+    );
+
+  }
+
+  exportUsers() {
+
+    exportUsersToCSV(
+      this.filteredUsers()
+    );
+
+  }
 
 }
