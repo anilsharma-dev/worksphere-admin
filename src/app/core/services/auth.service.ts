@@ -21,7 +21,25 @@ export class AuthService {
 
   isAuthenticated =
     signal(
-      !!localStorage.getItem('token')
+      !!localStorage.getItem(
+        'token'
+      )
+    );
+
+  currentUserRole =
+    signal<
+      'admin'
+      | 'manager'
+      | 'user'
+    >(
+      (
+        localStorage.getItem(
+          'role'
+        ) as
+          'admin'
+          | 'manager'
+          | 'user'
+      ) || 'admin'
     );
 
   login(
@@ -45,7 +63,13 @@ export class AuthService {
         'admin'
       );
 
-      this.isAuthenticated.set(true);
+      this.currentUserRole.set(
+        'admin'
+      );
+
+      this.isAuthenticated.set(
+        true
+      );
 
       this.router.navigate(['/']);
 
@@ -57,13 +81,22 @@ export class AuthService {
 
   logout() {
 
-    localStorage.removeItem('token');
+    localStorage.removeItem(
+      'token'
+    );
 
-    localStorage.removeItem('role');
+    localStorage.removeItem(
+      'role'
+    );
 
-    this.isAuthenticated.set(false);
+    this.isAuthenticated.set(
+      false
+    );
 
-    this.router.navigate(['/login']);
+    this.router.navigate([
+      '/login'
+    ]);
+
   }
 
   isLoggedIn() {
@@ -71,6 +104,35 @@ export class AuthService {
     return !!localStorage.getItem(
       'token'
     );
+  }
+
+  changeRole(
+    role:
+      'admin'
+      | 'manager'
+      | 'user'
+  ) {
+
+    localStorage.setItem(
+      'role',
+      role
+    );
+
+    this.currentUserRole.set(
+      role
+    );
+
+  }
+
+  hasRole(
+    role: string
+  ): boolean {
+
+    return (
+      this.currentUserRole()
+      === role
+    );
+
   }
 
 }

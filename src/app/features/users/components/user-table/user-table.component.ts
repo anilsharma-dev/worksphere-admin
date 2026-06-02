@@ -3,56 +3,82 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
+  ChangeDetectionStrategy,
+  inject
+}
+from '@angular/core';
 
 import {
   User
-} from '../../../../core/models/user.model';
+}
+from '../../../../core/models/user.model';
+
+import {
+  AuthService
+}
+from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-user-table',
+
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './user-table.component.html',
-  styleUrl: './user-table.component.scss',
+
+  templateUrl:
+    './user-table.component.html',
+
+  styleUrl:
+    './user-table.component.scss',
+
   changeDetection:
     ChangeDetectionStrategy.OnPush
 })
+
 export class UserTableComponent {
+
+  private authService =
+    inject(AuthService);
+
+  currentRole =
+    this.authService.currentUserRole;
 
   @Input()
   users: User[] = [];
 
   @Output()
-  edit = new EventEmitter<User>();
+  edit =
+    new EventEmitter<User>();
 
   @Output()
-  delete = new EventEmitter<number>();
+  delete =
+    new EventEmitter<number>();
 
   @Output()
-statusChange =
-  new EventEmitter<User>();
+  statusChange =
+    new EventEmitter<User>();
 
   currentPage = 1;
 
   pageSize = 5;
 
-  get startIndex() {
-    return (this.currentPage - 1)
-      * this.pageSize;
+  get startIndex(): number {
+
+    return (
+      (this.currentPage - 1)
+      * this.pageSize
+    );
+
   }
 
-  get endIndex() {
-    return this.startIndex
-      + this.pageSize;
+  get endIndex(): number {
+
+    return (
+      this.startIndex
+      + this.pageSize
+    );
+
   }
 
-  get paginatedUsers() {
+  get paginatedUsers(): User[] {
 
     return this.users.slice(
       this.startIndex,
@@ -63,29 +89,32 @@ statusChange =
 
   nextPage() {
 
-    if(this.endIndex < this.users.length) {
+    if(
+      this.endIndex
+      < this.users.length
+    ) {
+
       this.currentPage++;
     }
 
   }
-toggleStatus(user: User) {
 
-  this.statusChange.emit(user);
-
-}
   prevPage() {
 
     if(this.currentPage > 1) {
+
       this.currentPage--;
     }
 
   }
-trackByUser(
-  index: number,
-  user: User
-) {
 
-  return user.id;
+  trackByUser(
+    index: number,
+    user: User
+  ) {
 
-}
+    return user.id;
+
+  }
+
 }

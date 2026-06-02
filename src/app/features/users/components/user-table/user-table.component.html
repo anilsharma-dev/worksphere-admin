@@ -6,12 +6,29 @@
 
       <tr>
 
-        <th>S.No</th>
-        <th>User</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Status</th>
-        <th>Actions</th>
+        <th>
+          S.No
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Email
+        </th>
+
+        <th>
+          Role
+        </th>
+
+        <th>
+          Status
+        </th>
+
+        <th>
+          Actions
+        </th>
 
       </tr>
 
@@ -19,97 +36,146 @@
 
     <tbody>
 
-      <tr *ngFor="let user of paginatedUsers;
-  let i = index;
-  trackBy: trackByUser
-">
+      @for(
+        user of paginatedUsers;
+        track user.id;
+        let i = $index
+      ) {
 
-        <!-- USER -->
-        <td>
-          <div class="user-name">
-                {{ i+1 }}
-              </div>
-        </td>
-        <td>
+        <tr>
 
-          <div class="user-cell">
-            
+          <!-- S.NO -->
 
-            <div>
+          <td>
 
-              <div class="user-name">
-                {{ user.name }}
-              </div>
+            <div class="user-name">
 
-              
+              {{ startIndex + i + 1 }}
 
             </div>
 
-          </div>
+          </td>
 
-        </td>
+          <!-- USER -->
 
-        <!-- EMAIL -->
+          <td>
 
-        <td>
-          {{ user.email }}
-        </td>
+            <div class="user-cell">
 
-        <!-- ROLE -->
+              <div class="avatar">
 
-        <td>
+                {{ user.name.charAt(0) }}
 
-          <span
-            class="role-badge"
-            [ngClass]="user.role">
+              </div>
 
-            {{ user.role }}
+              <div>
 
-          </span>
+                <div class="user-name">
 
-        </td>
+                  {{ user.name }}
 
-        <!-- STATUS -->
+                </div>
 
-        <td>
+              </div>
 
-        <button
-        class="status-badge"
-        [ngClass]="user.status"
-        (click)="toggleStatus(user)">
+            </div>
 
-        {{ user.status }}
+          </td>
 
-      </button>
+          <!-- EMAIL -->
 
-        </td>
+          <td>
 
-        <!-- ACTIONS -->
+            {{ user.email }}
 
-        <td>
+          </td>
 
-          <div class="actions">
+          <!-- ROLE -->
+
+          <td>
+
+            <span
+              class="role-badge"
+              [class]="user.role">
+
+              {{ user.role }}
+
+            </span>
+
+          </td>
+
+          <!-- STATUS -->
+
+          <td>
 
             <button
-              (click)="edit.emit(user)">
+              class="status-badge"
+              [class]="user.status"
+              (click)="statusChange.emit(user)">
 
-              Edit
+              {{ user.status }}
 
             </button>
 
-            <button
-              class="delete-btn"
-              (click)="delete.emit(user.id)">
+          </td>
 
-              Delete
+          <!-- ACTIONS -->
 
-            </button>
+          <td>
 
-          </div>
+            <div class="actions">
 
-        </td>
+              @if(
+                currentRole() === 'admin'
+                ||
+                currentRole() === 'manager'
+              ) {
 
-      </tr>
+                <button
+                  class="edit-btn"
+                  (click)="edit.emit(user)">
+
+                  Edit
+
+                </button>
+
+              }
+
+              @if(
+                currentRole() === 'admin'
+              ) {
+
+                <button
+                  class="delete-btn"
+                  (click)="delete.emit(user.id)">
+
+                  Delete
+
+                </button>
+
+              }
+
+              @if(
+  currentRole() !== 'admin'
+  &&
+  currentRole() !== 'manager'
+) {
+
+                <span class="readonly-badge">
+
+                  Read Only
+
+                </span>
+
+              }
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      }
 
     </tbody>
 

@@ -163,3 +163,87 @@ tbody tr {
 table {
   min-width: 900px;
 }
+.actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+.edit-btn {
+
+  padding: 8px 14px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #2563eb;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  transition:
+    all 0.2s ease;
+}
+
+.edit-btn:hover {
+
+  transform: translateY(-1px);
+
+  background: #1d4ed8;
+}
+
+.delete-btn {
+
+  padding: 8px 14px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #ef4444;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  transition:
+    all 0.2s ease;
+}
+
+.delete-btn:hover {
+
+  transform: translateY(-1px);
+
+  background: #dc2626;
+}
+
+.readonly-badge {
+
+  padding: 7px 12px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(148, 163, 184, 0.15);
+
+  color: var(--secondary-text);
+
+  font-size: 12px;
+
+  font-weight: 600;
+}

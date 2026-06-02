@@ -14,6 +14,30 @@
 
   <div class="header-actions">
 
+    <select
+      class="role-select"
+      (change)="changeRole($event)">
+
+      <option value="admin">
+
+        Admin
+
+      </option>
+
+      <option value="manager">
+
+        Manager
+
+      </option>
+
+      <option value="user">
+
+        User
+
+      </option>
+
+    </select>
+
     <button
       class="theme-btn"
       (click)="toggleTheme()">
