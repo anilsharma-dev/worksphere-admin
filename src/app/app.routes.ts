@@ -62,7 +62,18 @@ Routes = [
         loadComponent: () =>
           import('./features/chat/pages/chat-room/chat-room.component')
             .then(m => m.ChatRoomComponent)
-      }
+      },
+      {
+  path: 'settings',
+
+  loadComponent: () =>
+
+    import(
+      './features/settings/pages/settings-page/settings-page.component'
+    ).then(
+      m => m.SettingsPageComponent
+    )
+}
 
     ]
   }

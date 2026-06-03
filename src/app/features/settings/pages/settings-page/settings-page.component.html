@@ -1,0 +1,61 @@
+<div class="settings-page">
+
+  <div class="settings-header">
+
+    <h1>
+      Settings
+    </h1>
+
+    <p>
+      Manage your account preferences
+    </p>
+
+  </div>
+
+  <div class="settings-tabs">
+
+    <button
+      [class.active]="activeTab() === 'profile'"
+      (click)="activeTab.set('profile')">
+
+      Profile
+
+    </button>
+
+    <button
+      [class.active]="activeTab() === 'security'"
+      (click)="activeTab.set('security')">
+
+      Security
+
+    </button>
+
+    <button
+      [class.active]="activeTab() === 'preferences'"
+      (click)="activeTab.set('preferences')">
+
+      Preferences
+
+    </button>
+
+  </div>
+
+  @if(activeTab() === 'profile') {
+
+    <app-profile-settings />
+
+  }
+
+  @if(activeTab() === 'security') {
+
+    <app-security-settings />
+
+  }
+
+  @if(activeTab() === 'preferences') {
+
+    <app-preferences-settings />
+
+  }
+
+</div>
