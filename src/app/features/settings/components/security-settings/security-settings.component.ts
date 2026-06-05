@@ -1,6 +1,8 @@
 import {
   Component,
-  inject
+  computed,
+  inject,
+  signal
 }
 from '@angular/core';
 
@@ -29,8 +31,18 @@ from '@angular/forms';
 
 export class SecuritySettingsComponent {
 
- 
- private fb = inject(FormBuilder);
+  private fb =
+    inject(FormBuilder);
+
+  showCurrentPassword =
+    signal(false);
+
+  showNewPassword =
+    signal(false);
+
+  showConfirmPassword =
+    signal(false);
+
   passwordForm =
     this.fb.group({
 
@@ -54,11 +66,58 @@ export class SecuritySettingsComponent {
 
     });
 
+  passwordsMatch =
+    computed(() => {
+
+      return (
+        this.passwordForm.value
+          .newPassword
+        ===
+        this.passwordForm.value
+          .confirmPassword
+      );
+
+    });
+
+  toggleCurrentPassword() {
+
+    this.showCurrentPassword.update(
+      value => !value
+    );
+
+  }
+
+  toggleNewPassword() {
+
+    this.showNewPassword.update(
+      value => !value
+    );
+
+  }
+
+  toggleConfirmPassword() {
+
+    this.showConfirmPassword.update(
+      value => !value
+    );
+
+  }
+
   changePassword() {
 
+    if(
+      this.passwordForm.invalid
+      ||
+      !this.passwordsMatch()
+    ) {
+      return;
+    }
+
     alert(
-      'Password changed'
+      'Password changed successfully'
     );
+
+    this.passwordForm.reset();
 
   }
 

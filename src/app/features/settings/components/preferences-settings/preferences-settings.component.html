@@ -1,1 +1,96 @@
-<p>preferences-settings works!</p>
+<div class="settings-card">
+
+  <h2>
+    Preferences
+  </h2>
+
+  <div class="preference-item">
+
+    <div>
+
+      <h3>
+        Email Notifications
+      </h3>
+
+      <p>
+        Receive email updates
+      </p>
+
+    </div>
+
+    <input
+      type="checkbox"
+      [checked]="emailNotifications()"
+      (change)="toggleEmailNotifications()">
+
+  </div>
+
+  <div class="preference-item">
+
+    <div>
+
+      <h3>
+        Weekly Reports
+      </h3>
+
+      <p>
+        Receive weekly analytics reports
+      </p>
+
+    </div>
+
+    <input
+      type="checkbox"
+      [checked]="weeklyReports()"
+      (change)="toggleWeeklyReports()">
+
+  </div>
+
+  <div class="preference-item">
+
+    <div>
+
+      <h3>
+        Compact Mode
+      </h3>
+
+      <p>
+        Reduce spacing in dashboard
+      </p>
+
+    </div>
+
+    <input
+      type="checkbox"
+      [checked]="compactMode()"
+      (change)="toggleCompactMode()">
+
+  </div>
+
+  <div class="form-group">
+
+    <label>
+      Language
+    </label>
+
+    <select
+      [value]="language()"
+      (change)="
+        language.set(
+          $any($event.target).value
+        )
+      ">
+
+      <option>
+        English
+      </option>
+
+      <option>
+        Hindi
+      </option>
+
+    </select>
+
+  </div>
+
+</div>

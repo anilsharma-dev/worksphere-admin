@@ -1,1 +1,183 @@
-<p>security-settings works!</p>
+<div class="settings-card">
+
+  <h2>
+    Security Settings
+  </h2>
+
+  <form
+    [formGroup]="passwordForm"
+    (ngSubmit)="changePassword()">
+
+    <!-- CURRENT PASSWORD -->
+
+    <div class="form-group">
+
+      <label>
+        Current Password
+      </label>
+
+      <div class="password-field">
+
+        <input
+          [type]="
+            showCurrentPassword()
+              ? 'text'
+              : 'password'
+          "
+          formControlName="currentPassword">
+
+        <button
+          type="button"
+          class="toggle-btn"
+          (click)="toggleCurrentPassword()">
+
+          👁
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- NEW PASSWORD -->
+
+    <div class="form-group">
+
+      <label>
+        New Password
+      </label>
+
+      <div class="password-field">
+
+        <input
+          [type]="
+            showNewPassword()
+              ? 'text'
+              : 'password'
+          "
+          formControlName="newPassword">
+
+        <button
+          type="button"
+          class="toggle-btn"
+          (click)="toggleNewPassword()">
+
+          👁
+
+        </button>
+
+      </div>
+
+      <small>
+
+        Password must contain
+        at least 6 characters
+
+      </small>
+
+    </div>
+
+    <!-- CONFIRM PASSWORD -->
+
+    <div class="form-group">
+
+      <label>
+        Confirm Password
+      </label>
+
+      <div class="password-field">
+
+        <input
+          [type]="
+            showConfirmPassword()
+              ? 'text'
+              : 'password'
+          "
+          formControlName="confirmPassword">
+
+        <button
+          type="button"
+          class="toggle-btn"
+          (click)="toggleConfirmPassword()">
+
+          👁
+
+        </button>
+
+      </div>
+
+      @if(!passwordsMatch()) {
+
+        <small class="error-text">
+
+          Passwords do not match
+
+        </small>
+
+      }
+
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="
+        !passwordsMatch()
+        ||
+        passwordForm.invalid
+      ">
+
+      Change Password
+
+    </button>
+
+  </form>
+
+  <!-- 2FA -->
+
+  <div class="security-section">
+
+    <div>
+
+      <h3>
+        Two Factor Authentication
+      </h3>
+
+      <p>
+        Add extra account security
+      </p>
+
+    </div>
+
+    <label class="switch">
+
+      <input type="checkbox">
+
+      <span class="slider"></span>
+
+    </label>
+
+  </div>
+
+  <!-- ACTIVE SESSIONS -->
+
+  <div class="security-section">
+
+    <div>
+
+      <h3>
+        Active Sessions
+      </h3>
+
+      <p>
+        Chrome • Windows • Active now
+      </p>
+
+      <p>
+        Safari • iPhone • 2h ago
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
