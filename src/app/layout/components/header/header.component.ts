@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { ThemeService } from '../../../core/services/theme.service';
 import { Router } from '@angular/router';
+import { NotificationDropdownComponent } from '../../../shared/components/notification-dropdown/notification-dropdown.component';
 
 @Component({
     selector: 'app-header',
-    imports: [],
+    imports: [NotificationDropdownComponent],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
 })
