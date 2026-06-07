@@ -1,7 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject
+  computed,
+  inject,
+  signal
 } from '@angular/core';
 import { AnalyticsChartComponent } from '../../../../shared/components/analytics-chart/analytics-chart.component';
 import { UsersStore } from '../../../users/store/users.store';
@@ -25,19 +27,67 @@ import { UsersStore } from '../../../users/store/users.store';
 
 export class DashboardHomeComponent {
 
-private usersStore =
-  inject(UsersStore);
+private usersStore = inject(UsersStore);
+selectedRange = signal('month');
 
-totalUsers =
-  this.usersStore.totalUsers;
+totalUsers = this.usersStore.totalUsers;
 
-activeUsers =
-  this.usersStore.activeUsers;
+activeUsers = this.usersStore.activeUsers;
 
   ngOnInit() {
 
     this.usersStore.loadUsers();
   }
+  dashboardStats =
+  computed(() => {
+
+    switch(
+      this.selectedRange()
+    ) {
+
+      case 'today':
+
+        return {
+
+          revenue: '$2K',
+          sessions: 42,
+          conversion: '58%'
+
+        };
+
+      case 'week':
+
+        return {
+
+          revenue: '$8K',
+          sessions: 120,
+          conversion: '65%'
+
+        };
+
+      case 'year':
+
+        return {
+
+          revenue: '$240K',
+          sessions: 8400,
+          conversion: '81%'
+
+        };
+
+      default:
+
+        return {
+
+          revenue: '$24K',
+          sessions: 342,
+          conversion: '78%'
+
+        };
+
+    }
+
+  });
 activities = [
     {
       user: 'Anil',

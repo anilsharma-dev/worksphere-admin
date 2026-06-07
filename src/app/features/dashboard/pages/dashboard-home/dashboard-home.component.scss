@@ -283,3 +283,33 @@
 .chart-card {
   overflow-x: auto;
 }
+.filter-bar {
+
+  display: flex;
+
+  gap: 12px;
+
+  margin-bottom: 24px;
+}
+
+.filter-bar button {
+
+  padding: 10px 16px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  background: var(--card-bg);
+
+  color: var(--text-color);
+}
+
+.filter-bar button.active {
+
+  background: #2563eb;
+
+  color: white;
+}

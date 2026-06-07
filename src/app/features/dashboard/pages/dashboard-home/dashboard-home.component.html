@@ -3,7 +3,51 @@
   <!-- HEADER -->
 
  
+<div class="filter-bar">
 
+ <button
+  [class.active]="
+    selectedRange() === 'today'
+  "
+  (click)="
+    selectedRange.set('today')
+  ">
+    Today
+  </button>
+
+  <button
+  [class.active]="
+    selectedRange() === 'week'
+  "
+  (click)="
+    selectedRange.set('week')
+  ">
+
+  Week
+
+</button>
+
+ <button
+  [class.active]="
+    selectedRange() === 'month'
+  "
+  (click)="
+    selectedRange.set('month')
+  ">
+    Month
+  </button>
+
+  <button
+  [class.active]="
+    selectedRange() === 'year'
+  "
+  (click)="
+    selectedRange.set('year')
+  ">
+    Year
+  </button>
+
+</div>
   <!-- STATS -->
 
   <div class="state-grid">
@@ -29,12 +73,12 @@
       </div>
 
       <div class="stat-value">
-        $24K
+        {{ dashboardStats().revenue }}
       </div>
 
-      <div class="stat-growth">
+      <!-- <div class="stat-growth">
         +8% this month
-      </div>
+      </div> -->
 
     </div>
 
@@ -45,12 +89,12 @@
       </div>
 
       <div class="stat-value">
-        342
+        {{ dashboardStats().sessions }}
       </div>
 
-      <div class="stat-growth">
+      <!-- <div class="stat-growth">
         +5% today
-      </div>
+      </div> -->
 
     </div>
 
@@ -61,12 +105,12 @@
       </div>
 
       <div class="stat-value">
-        78%
+        {{ dashboardStats().conversion }}
       </div>
 
-      <div class="stat-growth">
+      <!-- <div class="stat-growth">
         +3% this week
-      </div>
+      </div> -->
 
     </div>
 
