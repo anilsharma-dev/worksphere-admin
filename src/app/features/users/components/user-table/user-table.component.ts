@@ -17,11 +17,13 @@ import {
   AuthService
 }
 from '../../../../core/services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-table',
 
   standalone: true,
+  imports: [CommonModule],
 
   templateUrl:
     './user-table.component.html',
@@ -35,26 +37,19 @@ from '../../../../core/services/auth.service';
 
 export class UserTableComponent {
 
-  private authService =
-    inject(AuthService);
+  private authService = inject(AuthService);
 
-  currentRole =
-    this.authService.currentUserRole;
+  currentRole = this.authService.currentUserRole;
 
-  @Input()
-  users: User[] = [];
+  @Input()users: User[] = [];
 
-  @Output()
-  edit =
-    new EventEmitter<User>();
+  @Output() edit = new EventEmitter<User>();
 
-  @Output()
-  delete =
-    new EventEmitter<number>();
+  @Output()delete = new EventEmitter<number>();
 
-  @Output()
-  statusChange =
-    new EventEmitter<User>();
+  @Output() statusChange = new EventEmitter<User>();
+
+  @Input() loading = false;
 
   currentPage = 1;
 

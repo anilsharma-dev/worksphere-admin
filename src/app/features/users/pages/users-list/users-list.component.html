@@ -75,7 +75,8 @@
         [users]="filteredUsers()"
         (edit)="openEditDialog($event)"
         (delete)="deleteUser($event)"
-        (statusChange)="toggleStatus($event)">
+        (statusChange)="toggleStatus($event)"
+        [loading]="loading()">
       </app-user-table>
 
     } @else {

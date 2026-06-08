@@ -36,144 +36,237 @@
 
     <tbody>
 
-      @for(
-        user of paginatedUsers;
-        track user.id;
-        let i = $index
-      ) {
+      @if(loading) {
 
-        <tr>
+        @for(
+          item of [1,2,3,4,5];
+          track item
+        ) {
 
-          <!-- S.NO -->
+          <tr>
 
-          <td>
+            <!-- S.NO -->
 
-            <div class="user-name">
+            <td>
 
-              {{ startIndex + i + 1 }}
+              <div
+                class="skeleton skeleton-text small">
+              </div>
 
-            </div>
+            </td>
 
-          </td>
+            <!-- USER -->
 
-          <!-- USER -->
+            <td>
 
-          <td>
+              <div class="user-cell">
 
-            <div class="user-cell">
+                <div
+                  class="skeleton skeleton-avatar">
+                </div>
 
-              <div class="avatar">
-
-                {{ user.name.charAt(0) }}
+                <div
+                  class="skeleton skeleton-text">
+                </div>
 
               </div>
 
-              <div>
+            </td>
 
-                <div class="user-name">
+            <!-- EMAIL -->
 
-                  {{ user.name }}
+            <td>
+
+              <div
+                class="skeleton skeleton-text">
+              </div>
+
+            </td>
+
+            <!-- ROLE -->
+
+            <td>
+
+              <div
+                class="skeleton skeleton-badge">
+              </div>
+
+            </td>
+
+            <!-- STATUS -->
+
+            <td>
+
+              <div
+                class="skeleton skeleton-badge">
+              </div>
+
+            </td>
+
+            <!-- ACTIONS -->
+
+            <td>
+
+              <div class="actions">
+
+                <div
+                  class="skeleton skeleton-btn">
+                </div>
+
+                <div
+                  class="skeleton skeleton-btn">
+                </div>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        }
+
+      } @else {
+
+        @for(
+          user of paginatedUsers;
+          track user.id;
+          let i = $index
+        ) {
+
+          <tr>
+
+            <!-- S.NO -->
+
+            <td>
+
+              <div class="user-name">
+
+                {{ startIndex + i + 1 }}
+
+              </div>
+
+            </td>
+
+            <!-- USER -->
+
+            <td>
+
+              <div class="user-cell">
+
+                <div class="avatar">
+
+                  {{ user.name.charAt(0) }}
+
+                </div>
+
+                <div>
+
+                  <div class="user-name">
+
+                    {{ user.name }}
+
+                  </div>
 
                 </div>
 
               </div>
 
-            </div>
+            </td>
 
-          </td>
+            <!-- EMAIL -->
 
-          <!-- EMAIL -->
+            <td>
 
-          <td>
+              {{ user.email }}
 
-            {{ user.email }}
+            </td>
 
-          </td>
+            <!-- ROLE -->
 
-          <!-- ROLE -->
+            <td>
 
-          <td>
+              <span
+                class="role-badge"
+                [class]="user.role">
 
-            <span
-              class="role-badge"
-              [class]="user.role">
+                {{ user.role }}
 
-              {{ user.role }}
+              </span>
 
-            </span>
+            </td>
 
-          </td>
+            <!-- STATUS -->
 
-          <!-- STATUS -->
+            <td>
 
-          <td>
+              <button
+                class="status-badge"
+                [class]="user.status"
+                (click)="statusChange.emit(user)">
 
-            <button
-              class="status-badge"
-              [class]="user.status"
-              (click)="statusChange.emit(user)">
+                {{ user.status }}
 
-              {{ user.status }}
+              </button>
 
-            </button>
+            </td>
 
-          </td>
+            <!-- ACTIONS -->
 
-          <!-- ACTIONS -->
+            <td>
 
-          <td>
+              <div class="actions">
 
-            <div class="actions">
+                @if(
+                  currentRole() === 'admin'
+                  ||
+                  currentRole() === 'manager'
+                ) {
 
-              @if(
-                currentRole() === 'admin'
-                ||
-                currentRole() === 'manager'
-              ) {
+                  <button
+                    class="edit-btn"
+                    (click)="edit.emit(user)">
 
-                <button
-                  class="edit-btn"
-                  (click)="edit.emit(user)">
+                    Edit
 
-                  Edit
+                  </button>
 
-                </button>
+                }
 
-              }
+                @if(
+                  currentRole() === 'admin'
+                ) {
 
-              @if(
-                currentRole() === 'admin'
-              ) {
+                  <button
+                    class="delete-btn"
+                    (click)="delete.emit(user.id)">
 
-                <button
-                  class="delete-btn"
-                  (click)="delete.emit(user.id)">
+                    Delete
 
-                  Delete
+                  </button>
 
-                </button>
+                }
 
-              }
+                @if(
+                  currentRole() !== 'admin'
+                  &&
+                  currentRole() !== 'manager'
+                ) {
 
-              @if(
-  currentRole() !== 'admin'
-  &&
-  currentRole() !== 'manager'
-) {
+                  <span class="readonly-badge">
 
-                <span class="readonly-badge">
+                    Read Only
 
-                  Read Only
+                  </span>
 
-                </span>
+                }
 
-              }
+              </div>
 
-            </div>
+            </td>
 
-          </td>
+          </tr>
 
-        </tr>
+        }
 
       }
 
