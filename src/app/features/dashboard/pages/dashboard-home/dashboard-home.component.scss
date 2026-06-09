@@ -313,3 +313,103 @@
 
   color: white;
 }
+
+.skeleton {
+
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background:
+    rgba(255,255,255,0.08);
+}
+
+.skeleton::after {
+
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  transform:
+    translateX(-100%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.18),
+      transparent
+    );
+
+  animation:
+    shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+
+  100% {
+
+    transform:
+      translateX(100%);
+  }
+
+}
+
+.skeleton-title {
+
+  width: 100px;
+  height: 14px;
+
+  margin-bottom: 14px;
+}
+
+.skeleton-value {
+
+  width: 140px;
+  height: 32px;
+
+  margin-bottom: 16px;
+}
+
+.skeleton-growth {
+
+  width: 90px;
+  height: 12px;
+}
+
+.skeleton-progress {
+
+  width: 100%;
+  height: 60px;
+}
+
+.skeleton-chart-title {
+
+  width: 180px;
+  height: 20px;
+
+  margin-bottom: 24px;
+}
+
+.skeleton-chart {
+
+  width: 100%;
+  height: 320px;
+}
+
+.skeleton-notification {
+
+  width: 100%;
+  height: 48px;
+
+  margin-bottom: 14px;
+}
+
+.activity-content {
+
+  flex: 1;
+}

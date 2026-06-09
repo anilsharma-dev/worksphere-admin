@@ -3,17 +3,29 @@ import {
   Component,
   computed,
   inject,
+  OnInit,
   signal
-} from '@angular/core';
-import { AnalyticsChartComponent } from '../../../../shared/components/analytics-chart/analytics-chart.component';
-import { UsersStore } from '../../../users/store/users.store';
+}
+from '@angular/core';
+
+import {
+  AnalyticsChartComponent
+}
+from '../../../../shared/components/analytics-chart/analytics-chart.component';
+
+import {
+  UsersStore
+}
+from '../../../users/store/users.store';
 
 @Component({
   selector: 'app-dashboard-home',
 
   standalone: true,
 
-  imports: [AnalyticsChartComponent],
+  imports: [
+    AnalyticsChartComponent
+  ],
 
   templateUrl:
     './dashboard-home.component.html',
@@ -25,70 +37,82 @@ import { UsersStore } from '../../../users/store/users.store';
     ChangeDetectionStrategy.OnPush
 })
 
-export class DashboardHomeComponent {
+export class DashboardHomeComponent
+implements OnInit {
 
-private usersStore = inject(UsersStore);
-selectedRange = signal('month');
+  private usersStore =
+    inject(UsersStore);
 
-totalUsers = this.usersStore.totalUsers;
+  totalUsers =
+    this.usersStore.totalUsers;
 
-activeUsers = this.usersStore.activeUsers;
+  activeUsers =
+    this.usersStore.activeUsers;
 
-  ngOnInit() {
+  dashboardLoading =
+    signal(true);
 
-    this.usersStore.loadUsers();
-  }
+  selectedRange =
+    signal<
+      'today'
+      | 'week'
+      | 'month'
+      | 'year'
+    >('month');
+
   dashboardStats =
-  computed(() => {
+    computed(() => {
 
-    switch(
-      this.selectedRange()
-    ) {
+      switch(
+        this.selectedRange()
+      ) {
 
-      case 'today':
+        case 'today':
 
-        return {
+          return {
 
-          revenue: '$2K',
-          sessions: 42,
-          conversion: '58%'
+            revenue: '$2K',
+            sessions: 42,
+            conversion: '58%'
 
-        };
+          };
 
-      case 'week':
+        case 'week':
 
-        return {
+          return {
 
-          revenue: '$8K',
-          sessions: 120,
-          conversion: '65%'
+            revenue: '$8K',
+            sessions: 120,
+            conversion: '65%'
 
-        };
+          };
 
-      case 'year':
+        case 'year':
 
-        return {
+          return {
 
-          revenue: '$240K',
-          sessions: 8400,
-          conversion: '81%'
+            revenue: '$240K',
+            sessions: 8400,
+            conversion: '81%'
 
-        };
+          };
 
-      default:
+        default:
 
-        return {
+          return {
 
-          revenue: '$24K',
-          sessions: 342,
-          conversion: '78%'
+            revenue: '$24K',
+            sessions: 342,
+            conversion: '78%'
 
-        };
+          };
 
-    }
+      }
 
-  });
-activities = [
+    });
+
+  activities = [
+
     {
       user: 'Anil',
       action: 'created a new user'
@@ -110,5 +134,15 @@ activities = [
     }
 
   ];
+
+  ngOnInit(): void {
+
+    setTimeout(() => {
+
+      this.dashboardLoading.set(false);
+
+    }, 1500);
+
+  }
 
 }
