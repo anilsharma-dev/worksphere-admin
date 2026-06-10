@@ -1,16 +1,52 @@
 <div class="messages-container">
 
-  @for (message of messages; track message) {
-    <div
-      class="message"
-      >
-      <div class="sender">
-        {{ message.sender }}
+  @if(loading()) {
+
+    @for(
+      item of [1,2,3,4,5];
+      track item
+    ) {
+
+      <div
+        class="message skeleton-message">
+
+        <div
+          class="skeleton skeleton-sender">
+        </div>
+
+        <div
+          class="skeleton skeleton-text">
+        </div>
+
       </div>
-      <div class="text">
-        {{ message.text }}
+
+    }
+
+  } @else {
+
+    @for(
+      message of messages;
+      track message
+    ) {
+
+      <div class="message">
+
+        <div class="sender">
+
+          {{ message.sender }}
+
+        </div>
+
+        <div class="text">
+
+          {{ message.text }}
+
+        </div>
+
       </div>
-    </div>
+
+    }
+
   }
 
 </div>
