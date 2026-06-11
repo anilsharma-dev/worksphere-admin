@@ -23,12 +23,19 @@ export class ToastService {
   ) {
 
     this.snackBar.open(
+
       message,
+
       'Close',
+
       {
-        duration: 3000
+        duration: 3000,
+        panelClass:
+          ['success-snackbar']
       }
+
     );
+
   }
 
   error(
@@ -36,12 +43,19 @@ export class ToastService {
   ) {
 
     this.snackBar.open(
+
       message,
+
       'Close',
+
       {
-        duration: 3000
+        duration: 4000,
+        panelClass:
+          ['error-snackbar']
       }
+
     );
+
   }
 
 }

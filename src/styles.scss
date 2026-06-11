@@ -196,3 +196,20 @@ body {
   border:
     1px solid var(--border-color);
 }
+.success-snackbar {
+
+  --mdc-snackbar-container-color:
+    #16a34a !important;
+
+  --mat-mdc-snack-bar-button-color:
+    white !important;
+}
+
+.error-snackbar {
+
+  --mdc-snackbar-container-color:
+    #dc2626 !important;
+
+  --mat-mdc-snack-bar-button-color:
+    white !important;
+}

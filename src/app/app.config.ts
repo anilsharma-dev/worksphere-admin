@@ -11,12 +11,16 @@ from '@angular/fire/auth';
 
 import { environment }
 from '../environments/environment';
+import {
+  errorInterceptor
+}
+from './core/interceptors/error.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor,errorInterceptor])),
   ]
 };
 

@@ -58,11 +58,6 @@ export class UsersStore {
         },
 
         error: () => {
-
-          this.error.set(
-            'Failed to load users'
-          );
-
           this.loading.set(false);
         }
 
