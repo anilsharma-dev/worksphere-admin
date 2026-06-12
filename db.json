@@ -1,27 +1,6 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "John Doe",
-      "email": "john@example.com",
-      "role": "admin",
-      "status": "active"
-    },
-    {
-      "id": "2",
-      "name": "Sarah Smith",
-      "email": "sarah@example.com",
-      "role": "manager",
-      "status": "active"
-    },
-    {
-      "id": "3",
-      "name": "David Johnson",
-      "email": "david@example.com",
-      "role": "user",
-      "status": "active"
-    },
-    {
       "name": "Ved Sharma",
       "email": "ved@gmail.com",
       "role": "admin",

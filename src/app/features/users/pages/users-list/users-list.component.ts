@@ -69,6 +69,12 @@ import {
 }
 from '../../../../core/utils/export.util';
 
+import {
+  ConfirmDialogComponent
+}
+from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { ConfirmationService } from '../../../../core/services/confirmation.service';
+
 @Component({
   selector: 'app-users-list',
 
@@ -104,6 +110,11 @@ implements OnInit {
 
   private dialog =
     inject(MatDialog);
+
+    private confirmationService =
+  inject(
+    ConfirmationService
+  );
 
   searchControl =
     new FormControl('');
@@ -247,32 +258,43 @@ implements OnInit {
 
   }
 
-  deleteUser(
-    id: number
-  ) {
+ deleteUser(
+  id: number
+) {
 
-    const confirmed =
-      confirm(
-        'Delete this user?'
-      );
+  this.confirmationService
+    .confirm(
 
-    if(!confirmed) {
-      return;
-    }
+      'Delete User',
 
-    this.usersService
-      .deleteUser(id)
-      .subscribe(() => {
+      'Are you sure you want to delete this user?',
 
-        this.usersStore.loadUsers();
+      'Delete'
 
-        this.toastService.success(
-          'User deleted successfully'
-        );
+    )
+    .subscribe(result => {
 
-      });
+      if(!result) {
+        return;
+      }
 
-  }
+      this.usersService
+        .deleteUser(id)
+        .subscribe(() => {
+
+          this.usersStore
+            .loadUsers();
+
+          this.toastService
+            .success(
+              'User deleted successfully'
+            );
+
+        });
+
+    });
+
+}
 
   toggleStatus(
     user: User
