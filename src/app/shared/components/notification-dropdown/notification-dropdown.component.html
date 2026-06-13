@@ -22,48 +22,107 @@
 
     <div class="dropdown-panel">
 
-      <h3>
-        Notifications
-      </h3>
+      <div class="dropdown-header">
 
-      @for(
-        item of notifications();
-        track item.id
-      ) {
+        <h3>
 
-        <div
-          class="notification-item"
-          [class.read]="item.read">
+          Notifications
 
-          <div>
+        </h3>
 
-            <h4>
-              {{ item.title }}
-            </h4>
+        @if(notifications().length > 0) {
 
-            <p>
-              {{ item.message }}
-            </p>
-
-            <small>
-              {{ item.time }}
-            </small>
-
-          </div>
-
-          @if(!item.read) {
+          <div class="header-actions">
 
             <button
-              class="mark-btn"
-              (click)="markAsRead(item.id)">
+              class="action-btn"
+              (click)="markAllAsRead()">
 
-              Mark Read
+              Read All
 
             </button>
 
-          }
+            <button
+              class="action-btn danger"
+              (click)="clearAll()">
+
+              Clear
+
+            </button>
+
+          </div>
+
+        }
+
+      </div>
+
+      @if(notifications().length === 0) {
+
+        <div class="empty-state">
+
+          No notifications
 
         </div>
+
+      } @else {
+
+        @for(
+          item of notifications();
+          track item.id
+        ) {
+
+          <div
+            class="notification-item"
+            [class.read]="item.read">
+
+            <div class="notification-content">
+
+              <h4>
+
+                {{ item.title }}
+
+              </h4>
+
+              <p>
+
+                {{ item.message }}
+
+              </p>
+
+              <small>
+
+                {{ item.time }}
+
+              </small>
+
+            </div>
+
+            <div class="notification-actions">
+
+              @if(!item.read) {
+
+                <button
+                  class="mark-btn"
+                  (click)="markAsRead(item.id)">
+
+                  Read
+
+                </button>
+
+              }
+
+              <button
+                class="delete-btn"
+                (click)="deleteNotification(item.id)">
+
+                ✕
+              </button>
+
+            </div>
+
+          </div>
+
+        }
 
       }
 

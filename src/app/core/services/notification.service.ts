@@ -24,11 +24,7 @@ export interface NotificationItem {
 })
 
 export class NotificationService {
-
-  /* -------------------------------- */
   /* NOTIFICATION DROPDOWN STORE */
-  /* -------------------------------- */
-
   notifications =
     signal<NotificationItem[]>([
 
@@ -63,8 +59,10 @@ export class NotificationService {
 
       this.notifications()
         .filter(
-          n => !n.read
-        ).length
+          notification =>
+            !notification.read
+        )
+        .length
 
     );
 
@@ -92,6 +90,45 @@ export class NotificationService {
 
   }
 
+  markAllAsRead() {
+
+    this.notifications.update(
+      items =>
+
+        items.map(item => ({
+
+          ...item,
+
+          read: true
+
+        }))
+
+    );
+
+  }
+
+  deleteNotification(
+    id: number
+  ) {
+
+    this.notifications.update(
+      items =>
+
+        items.filter(
+          item =>
+            item.id !== id
+        )
+
+    );
+
+  }
+
+  clearAll() {
+
+    this.notifications.set([]);
+
+  }
+
   addNotification(
     notification: NotificationItem
   ) {
@@ -107,11 +144,7 @@ export class NotificationService {
     );
 
   }
-
-  /* -------------------------------- */
   /* TOAST NOTIFICATIONS */
-  /* -------------------------------- */
-
   toastMessage =
     signal('');
 
@@ -133,6 +166,24 @@ export class NotificationService {
       this.showToast.set(false);
 
     }, 3000);
+
+  }
+
+  error(
+    message: string
+  ) {
+
+    this.toastMessage.set(
+      message
+    );
+
+    this.showToast.set(true);
+
+    setTimeout(() => {
+
+      this.showToast.set(false);
+
+    }, 4000);
 
   }
 

@@ -1,9 +1,19 @@
-import { Component,inject,signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal
+}
+from '@angular/core';
 
-import { CommonModule } from '@angular/common';
-import { NotificationService } from '../../../core/services/notification.service';
+import {
+  CommonModule
+}
+from '@angular/common';
 
-
+import {
+  NotificationService
+}
+from '../../../core/services/notification.service';
 
 @Component({
   selector:
@@ -22,16 +32,23 @@ import { NotificationService } from '../../../core/services/notification.service
     './notification-dropdown.component.scss'
 })
 
-export class
-NotificationDropdownComponent {
+export class NotificationDropdownComponent {
 
-  private notificationService = inject(NotificationService);
+  private notificationService =
+    inject(
+      NotificationService
+    );
 
-  isOpen = signal(false);
+  isOpen =
+    signal(false);
 
-  notifications = this.notificationService.notifications;
+  notifications =
+    this.notificationService
+      .notifications;
 
-  unreadCount = this.notificationService.unreadCount;
+  unreadCount =
+    this.notificationService
+      .unreadCount;
 
   toggleDropdown() {
 
@@ -45,7 +62,31 @@ NotificationDropdownComponent {
     id: number
   ) {
 
-    this.notificationService.markAsRead(id);
+    this.notificationService
+      .markAsRead(id);
+
+  }
+
+  markAllAsRead() {
+
+    this.notificationService
+      .markAllAsRead();
+
+  }
+
+  deleteNotification(
+    id: number
+  ) {
+
+    this.notificationService
+      .deleteNotification(id);
+
+  }
+
+  clearAll() {
+
+    this.notificationService
+      .clearAll();
 
   }
 
