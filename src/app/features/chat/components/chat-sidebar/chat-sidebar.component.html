@@ -1,17 +1,66 @@
 <div class="chat-sidebar">
 
-  <h3>Teams</h3>
+  <h3>
 
-  <div class="channel active">
-    General
-  </div>
+    Teams
 
-  <div class="channel">
-    Development
-  </div>
+  </h3>
 
-  <div class="channel">
-    Design
-  </div>
+  @for(
+    channel of channels();
+    track channel
+  ) {
+
+    <div
+      class="channel"
+      [class.active]="
+        activeChannel() === channel
+      "
+      (click)="
+        selectChannel(
+          channel
+        )
+      ">
+
+      <div
+        class="channel-info">
+
+        <div>
+
+          {{ channel }}
+
+        </div>
+
+        <small>
+
+          {{
+            lastMessage(
+              channel
+            )
+          }}
+
+        </small>
+
+      </div>
+
+      @if(
+        unreadCounts()[channel]
+        > 0
+      ) {
+
+        <span
+          class="unread-badge">
+
+          {{
+            unreadCounts()[channel]
+          }}
+
+        </span>
+
+      }
+
+    </div>
+
+  }
 
 </div>

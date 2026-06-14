@@ -1,54 +1,69 @@
 import {
   Component,
   OnInit,
-  signal
+  signal,
+  computed,
+  inject
 }
 from '@angular/core';
 
 import {
-  ChatService,
-  Message
+  CommonModule
+}
+from '@angular/common';
+
+import {
+  ChatService
 }
 from '../../../../core/services/chat.service';
 
 @Component({
-  selector: 'app-chat-window',
+
+  selector:
+    'app-chat-window',
 
   standalone: true,
 
-  imports: [],
+  imports: [
+    CommonModule
+  ],
 
   templateUrl:
     './chat-window.component.html',
 
   styleUrl:
     './chat-window.component.scss'
+
 })
 
 export class ChatWindowComponent
 implements OnInit {
 
-  messages: Message[] = [];
+  private chatService =
+    inject(ChatService);
 
   loading =
     signal(true);
 
-  constructor(
-    private chatService: ChatService
-  ) {}
+  messages =
+    computed(() =>
+
+      this.chatService
+        .getMessages()
+
+    );
+
+  activeChannel =
+    this.chatService
+      .activeChannel;
 
   ngOnInit(): void {
 
     setTimeout(() => {
 
-      this.chatService.messages$
-        .subscribe(messages => {
-
-          this.messages = messages;
-
-          this.loading.set(false);
-
-        });
+      this.loading.set(
+        false
+      );
 
     }, 1200);
 

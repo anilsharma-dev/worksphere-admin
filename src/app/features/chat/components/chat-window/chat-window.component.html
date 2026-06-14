@@ -1,21 +1,40 @@
 <div class="messages-container">
 
+  <div class="chat-header">
+
+    <h3>
+
+      {{ activeChannel() }}
+
+    </h3>
+
+  </div>
+
   @if(loading()) {
 
     @for(
-      item of [1,2,3,4,5];
+      item of [1,2,3,4];
       track item
     ) {
 
       <div
-        class="message skeleton-message">
+        class="message-skeleton">
 
         <div
-          class="skeleton skeleton-sender">
+          class="skeleton-avatar">
         </div>
 
         <div
-          class="skeleton skeleton-text">
+          class="skeleton-content">
+
+          <div
+            class="skeleton-line">
+          </div>
+
+          <div
+            class="skeleton-line short">
+          </div>
+
         </div>
 
       </div>
@@ -24,24 +43,50 @@
 
   } @else {
 
-    @for(
-      message of messages;
-      track message
-    ) {
+    @if(messages().length) {
 
-      <div class="message">
+      @for(
+        message of messages();
+        track $index
+      ) {
 
-        <div class="sender">
+        <div
+          class="message">
 
-          {{ message.sender }}
+          <div
+            class="sender">
+
+            {{ message.sender }}
+
+          </div>
+
+          <div
+            class="text">
+
+            {{ message.text }}
+
+          </div>
+
+          <div
+            class="timestamp">
+
+            {{
+              message.timestamp
+              | date:'shortTime'
+            }}
+
+          </div>
 
         </div>
 
-        <div class="text">
+      }
 
-          {{ message.text }}
+    } @else {
 
-        </div>
+      <div
+        class="empty-chat">
+
+        No messages in this channel
 
       </div>
 

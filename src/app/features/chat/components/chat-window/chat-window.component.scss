@@ -4,109 +4,154 @@
 
   flex-direction: column;
 
-  gap: 14px;
+  height: 100%;
 
   padding: 20px;
+
+  overflow-y: auto;
+
+  background: var(--card-bg);
+}
+
+.chat-header {
+
+  padding-bottom: 16px;
+
+  margin-bottom: 20px;
+
+  border-bottom:
+    1px solid
+    var(--border-color);
+}
+
+.chat-header h3 {
+
+  margin: 0;
+
+  font-size: 20px;
+
+  font-weight: 600;
 }
 
 .message {
 
-  padding: 14px 16px;
+  max-width: 75%;
 
-  border-radius: 14px;
+  padding: 12px 16px;
 
-  background: var(--card-bg);
+  margin-bottom: 16px;
 
-  border:
-    1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+
+  background: #2563eb;
+
+  color: white;
+
+  align-self: flex-start;
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.08);
 }
 
 .sender {
 
   font-size: 13px;
 
-  font-weight: 700;
+  font-weight: 600;
 
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 
-  color: var(--primary-color);
+  opacity: .9;
 }
 
 .text {
 
-  font-size: 14px;
-
   line-height: 1.5;
 
-  color: var(--text-color);
+  word-break: break-word;
 }
 
-/* SKELETON */
+.timestamp {
 
-.skeleton {
+  margin-top: 8px;
 
-  position: relative;
+  font-size: 11px;
 
-  overflow: hidden;
-
-  border-radius: 10px;
-
-  background:
-    rgba(255,255,255,0.08);
+  opacity: .8;
 }
 
-.skeleton::after {
+.empty-chat {
 
-  content: '';
+  display: flex;
 
-  position: absolute;
+  align-items: center;
 
-  inset: 0;
+  justify-content: center;
 
-  transform:
-    translateX(-100%);
+  flex: 1;
 
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,0.18),
-      transparent
-    );
-
-  animation:
-    shimmer 1.4s infinite;
+  color: var(--secondary-text);
 }
 
-@keyframes shimmer {
+/* Skeleton */
 
-  100% {
+.message-skeleton {
 
-    transform:
-      translateX(100%);
+  display: flex;
+
+  gap: 12px;
+
+  margin-bottom: 18px;
+}
+
+.skeleton-avatar {
+
+  width: 40px;
+
+  height: 40px;
+
+  border-radius: 50%;
+
+  background: #e5e7eb;
+
+  animation: pulse 1.5s infinite;
+}
+
+.skeleton-content {
+
+  flex: 1;
+}
+
+.skeleton-line {
+
+  height: 12px;
+
+  border-radius: 8px;
+
+  margin-bottom: 8px;
+
+  background: #e5e7eb;
+
+  animation: pulse 1.5s infinite;
+}
+
+.skeleton-line.short {
+
+  width: 40%;
+}
+
+@keyframes pulse {
+
+  0% {
+    opacity: .5;
   }
 
-}
+  50% {
+    opacity: 1;
+  }
 
-.skeleton-message {
+  100% {
+    opacity: .5;
+  }
 
-  padding: 16px;
-
-  border-radius: 14px;
-}
-
-.skeleton-sender {
-
-  width: 90px;
-
-  height: 14px;
-
-  margin-bottom: 12px;
-}
-
-.skeleton-text {
-
-  width: 220px;
-
-  height: 16px;
 }
