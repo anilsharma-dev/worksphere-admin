@@ -1,14 +1,24 @@
-<div class="messages-container">
+<div
+  #messageContainer
+  class="messages-container">
 
   <div class="chat-header">
 
-    <h3>
+  <h3>
 
-      {{ activeChannel() }}
+    {{ activeChannel() }}
 
-    </h3>
+  </h3>
 
-  </div>
+  <button
+    class="clear-btn"
+    (click)="clearChat()">
+
+    Clear Chat
+
+  </button>
+
+</div>
 
   @if(loading()) {
 

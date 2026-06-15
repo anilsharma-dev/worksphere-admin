@@ -155,3 +155,33 @@
   }
 
 }
+.clear-btn {
+
+  border: none;
+
+  padding: 8px 14px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  background: #dc2626;
+
+  color: white;
+}
+
+.chat-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.messages-container {
+
+  height: 600px;
+
+  overflow-y: auto;
+}

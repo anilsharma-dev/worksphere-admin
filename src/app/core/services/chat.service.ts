@@ -151,4 +151,23 @@ export class ChatService {
 
   }
 
+clearCurrentChannel() {
+
+  const active =
+    this.activeChannel();
+
+  this.messages.update(
+    messages =>
+
+      messages.filter(
+        message =>
+
+          message.channel !==
+          active
+      )
+
+  );
+
+}
+
 }

@@ -3,7 +3,10 @@ import {
   OnInit,
   signal,
   computed,
-  inject
+  inject,
+  ElementRef,
+  ViewChild,
+  AfterViewChecked
 }
 from '@angular/core';
 
@@ -38,7 +41,12 @@ from '../../../../core/services/chat.service';
 
 export class ChatWindowComponent
 implements OnInit {
-
+  @ViewChild(
+  'messageContainer'
+)
+messageContainer?:
+  ElementRef;
+  
   private chatService =
     inject(ChatService);
 
@@ -68,5 +76,34 @@ implements OnInit {
     }, 1200);
 
   }
+
+
+clearChat() {
+
+  this.chatService
+    .clearCurrentChannel();
+
+}
+
+ngAfterViewChecked() {
+
+  this.scrollToBottom();
+
+}
+
+private scrollToBottom() {
+
+  const container =
+    this.messageContainer
+      ?.nativeElement;
+
+  if(container) {
+
+    container.scrollTop =
+      container.scrollHeight;
+
+  }
+
+}
 
 }
