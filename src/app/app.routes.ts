@@ -2,9 +2,16 @@ import {
   Routes
 }
 from '@angular/router';
-import { authGuard } from './core/guards/auth.guard';
 
+import {
+  authGuard
+}
+from './core/guards/auth.guard';
 
+import {
+  roleGuard
+}
+from './core/guards/role.guard';
 
 export const routes:
 Routes = [
@@ -50,6 +57,14 @@ Routes = [
       {
         path: 'users',
 
+        canActivate: [
+          roleGuard
+        ],
+
+        data: {
+          role: 'admin'
+        },
+
         loadComponent: () =>
           import(
             './features/users/pages/users-list/users-list.component'
@@ -57,23 +72,42 @@ Routes = [
             m => m.UsersListComponent
           )
       },
+
       {
         path: 'chat',
+
         loadComponent: () =>
-          import('./features/chat/pages/chat-room/chat-room.component')
-            .then(m => m.ChatRoomComponent)
+          import(
+            './features/chat/pages/chat-room/chat-room.component'
+          ).then(
+            m => m.ChatRoomComponent
+          )
       },
+
       {
-  path: 'settings',
+        path: 'settings',
 
-  loadComponent: () =>
+        canActivate: [
+          roleGuard
+        ],
 
-    import(
-      './features/settings/pages/settings-page/settings-page.component'
-    ).then(
-      m => m.SettingsPageComponent
-    )
-}
+        data: {
+          role: 'admin'
+        },
+
+        loadComponent: () =>
+          import(
+            './features/settings/pages/settings-page/settings-page.component'
+          ).then(
+            m => m.SettingsPageComponent
+          )
+      },
+
+      {
+        path: '**',
+
+        redirectTo: ''
+      }
 
     ]
   }
