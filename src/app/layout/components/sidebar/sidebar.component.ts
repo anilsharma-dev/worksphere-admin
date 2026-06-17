@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  inject
+}
+from '@angular/core';
 
 import {
   RouterLink,
@@ -6,13 +10,38 @@ import {
 }
 from '@angular/router';
 
+import {
+  AuthService
+}
+from '../../../core/services/auth.service';
+
 @Component({
-    selector: 'app-sidebar',
-    imports: [RouterLink,RouterLinkActive],
-    templateUrl: './sidebar.component.html',
-    styleUrl: './sidebar.component.scss'
+
+  selector:
+    'app-sidebar',
+
+  standalone: true,
+
+  imports: [
+    RouterLink,
+    RouterLinkActive
+  ],
+
+  templateUrl:
+    './sidebar.component.html',
+
+  styleUrl:
+    './sidebar.component.scss'
+
 })
+
 export class SidebarComponent {
-userRole =
-  localStorage.getItem('role');
+
+  private authService =
+    inject(AuthService);
+
+  currentRole =
+    this.authService
+      .currentUserRole;
+
 }

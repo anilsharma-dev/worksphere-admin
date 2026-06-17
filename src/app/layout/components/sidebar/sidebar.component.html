@@ -3,55 +3,68 @@
   <div class="logo-section">
 
     <div class="logo-box">
+
       W
+
     </div>
 
     <h2>
+
       WorkSphere
+
     </h2>
 
   </div>
 
- <nav>
+  <nav>
 
-  <a
-    routerLink="/"
-    routerLinkActive="active-link"
-    [routerLinkActiveOptions]="{
-      exact: true
-    }">
+    <a
+      routerLink="/"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{
+        exact: true
+      }">
 
-    Dashboard
+      Dashboard
 
-  </a>
+    </a>
 
-@if(
-  userRole === 'admin'
-){
+    @if(
+      currentRole() === 'admin'
+    ) {
 
-  <a
-    routerLink="/users">
+      <a
+        routerLink="/users"
+        routerLinkActive="active-link">
 
-    Users
+        Users
 
-  </a>
+      </a>
 
-}
+    }
 
-  <a
-    routerLink="/chat"
-    routerLinkActive="active-link">
+    <a
+      routerLink="/chat"
+      routerLinkActive="active-link">
 
-    Chat
+      Chat
 
-  </a>
+    </a>
 
-  <a routerLink="/settings">
+    @if(
+      currentRole() === 'admin'
+    ) {
 
-  ⚙️ Settings
+      <a
+        routerLink="/settings"
+        routerLinkActive="active-link">
 
-</a>
+        ⚙️ Settings
 
-</nav>
+      </a>
+
+    }
+
+  </nav>
 
 </div>
