@@ -102,7 +102,15 @@ Routes = [
             m => m.SettingsPageComponent
           )
       },
-
+      {
+        path: 'access-denied',
+        loadComponent: () =>
+          import(
+            './shared/pages/access-denied/access-denied.component'
+          ).then(
+            m => m.AccessDeniedComponent
+          )
+      },
       {
         path: '**',
 

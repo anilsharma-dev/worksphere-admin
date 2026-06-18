@@ -49,7 +49,7 @@ CanActivateFn = route => {
   }
 
   router.navigate([
-    '/'
+  '/access-denied'
   ]);
 
   return false;
