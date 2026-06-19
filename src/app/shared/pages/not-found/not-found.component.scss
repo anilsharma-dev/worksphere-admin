@@ -1,0 +1,74 @@
+.not-found {
+
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background:
+    var(--background-color);
+
+  padding: 24px;
+}
+
+.content {
+
+  text-align: center;
+
+  background:
+    var(--card-bg);
+
+  border:
+    1px solid
+    var(--border-color);
+
+  border-radius: 24px;
+
+  padding: 40px;
+
+  max-width: 500px;
+
+  width: 100%;
+}
+
+.content h1 {
+
+  margin: 0;
+
+  font-size: 80px;
+
+  color: #2563eb;
+}
+
+.content h2 {
+
+  margin: 12px 0;
+}
+
+.content p {
+
+  color:
+    var(--secondary-text);
+
+  margin-bottom: 24px;
+}
+
+.content a {
+
+  display: inline-block;
+
+  text-decoration: none;
+
+  background: #2563eb;
+
+  color: white;
+
+  padding: 12px 20px;
+
+  border-radius: 12px;
+
+  font-weight: 600;
+}

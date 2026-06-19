@@ -113,8 +113,12 @@ Routes = [
       },
       {
         path: '**',
-
-        redirectTo: ''
+        loadComponent: () =>
+          import(
+            './shared/pages/not-found/not-found.component'
+          ).then(
+            m => m.NotFoundComponent
+          )
       }
 
     ]
