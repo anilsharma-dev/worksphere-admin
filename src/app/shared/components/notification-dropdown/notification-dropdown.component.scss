@@ -220,3 +220,13 @@
 
   font-size: 14px;
 }
+@media (max-width: 768px) {
+
+  .dropdown-panel {
+
+    width: 90vw;
+
+    right: 0;
+  }
+
+}

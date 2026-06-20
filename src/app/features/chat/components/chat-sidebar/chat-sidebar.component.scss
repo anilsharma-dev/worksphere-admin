@@ -129,3 +129,17 @@
   }
 
 }
+@media (max-width: 768px) {
+
+  .chat-layout {
+
+    grid-template-columns:
+      1fr;
+  }
+
+  .chat-sidebar {
+
+    display: none;
+  }
+
+}

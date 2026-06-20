@@ -213,3 +213,17 @@ body {
   --mat-mdc-snack-bar-button-color:
     white !important;
 }
+* {
+
+  box-sizing: border-box;
+}
+
+img {
+
+  max-width: 100%;
+}
+
+body {
+
+  overflow-x: hidden;
+}
