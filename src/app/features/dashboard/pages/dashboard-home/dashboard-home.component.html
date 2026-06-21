@@ -1,357 +1,308 @@
 <div class="page-wrapper">
 
-  <!-- FILTER BAR -->
+  <div class="hero-card">
 
-  <div class="filter-bar">
+<div>
 
-    <button
-      [class.active]="
-        selectedRange() === 'today'
-      "
-      (click)="
-        selectedRange.set('today')
-      ">
+  <h1>
+    Welcome Back 👋
+  </h1>
 
-      Today
+  <p>
+    Monitor your business performance and team activity in real-time.
+  </p>
 
-    </button>
-
-    <button
-      [class.active]="
-        selectedRange() === 'week'
-      "
-      (click)="
-        selectedRange.set('week')
-      ">
-
-      Week
-
-    </button>
-
-    <button
-      [class.active]="
-        selectedRange() === 'month'
-      "
-      (click)="
-        selectedRange.set('month')
-      ">
-
-      Month
-
-    </button>
-
-    <button
-      [class.active]="
-        selectedRange() === 'year'
-      "
-      (click)="
-        selectedRange.set('year')
-      ">
-
-      Year
-
-    </button>
+</div>
 
   </div>
 
-  @if(dashboardLoading()) {
+  <div class="filter-bar">
 
-    <!-- STATS -->
 
-    <div class="state-grid">
+<button
+  [class.active]="selectedRange() === 'today'"
+  (click)="selectedRange.set('today')">
 
-      @for(
-        item of [1,2,3,4];
-        track item
-      ) {
+  Today
 
-        <div class="stat-card">
+</button>
 
-          <div
-            class="skeleton skeleton-title">
-          </div>
+<button
+  [class.active]="selectedRange() === 'week'"
+  (click)="selectedRange.set('week')">
 
-          <div
-            class="skeleton skeleton-value">
-          </div>
+  Week
 
-          <div
-            class="skeleton skeleton-growth">
-          </div>
+</button>
 
-        </div>
+<button
+  [class.active]="selectedRange() === 'month'"
+  (click)="selectedRange.set('month')">
 
-      }
+  Month
 
-    </div>
+</button>
 
-    <!-- PROGRESS -->
-<div class="progress-section">
-    <div class="progress-card">
+<button
+  [class.active]="selectedRange() === 'year'"
+  (click)="selectedRange.set('year')">
 
-      <div
-        class="skeleton skeleton-progress">
-      </div>
+  Year
 
-    </div>
-</div>
-    <!-- MAIN GRID -->
+</button>
 
-    <div class="dashboard-grid">
 
-      <!-- CHART -->
+  </div>
 
-      <div class="chart-card">
+@if(dashboardLoading()) {
 
-        <div
-          class="skeleton skeleton-chart-title">
-        </div>
 
-        <div
-          class="skeleton skeleton-chart">
-        </div>
+<div class="state-grid">
 
-      </div>
+  @for(item of [1,2,3,4]; track item) {
 
-      <!-- ACTIVITY -->
+    <div class="stat-card">
 
-      <div class="activity-card">
+      <div class="skeleton skeleton-title"></div>
 
-        <div
-          class="skeleton skeleton-chart-title">
-        </div>
+      <div class="skeleton skeleton-value"></div>
 
-        @for(
-          item of [1,2,3,4];
-          track item
-        ) {
-
-          <div class="activity-item">
-
-            <div
-              class="skeleton skeleton-avatar">
-            </div>
-
-            <div class="activity-content">
-
-              <div
-                class="skeleton skeleton-text">
-              </div>
-
-              <div
-                class="skeleton skeleton-growth">
-              </div>
-
-            </div>
-
-          </div>
-
-        }
-
-      </div>
-
-    </div>
-
-    <!-- NOTIFICATIONS -->
-
-    <div class="notification-card">
-
-      <div
-        class="skeleton skeleton-chart-title">
-      </div>
-
-      @for(
-        item of [1,2,3];
-        track item
-      ) {
-
-        <div
-          class="skeleton skeleton-notification">
-        </div>
-
-      }
-
-    </div>
-
-  } @else {
-
-    <!-- STATS -->
-
-    <div class="state-grid">
-
-      <div class="stat-card">
-
-        <div class="stat-title">
-          Total Users
-        </div>
-
-        <div class="stat-value">
-          {{ totalUsers() }}
-        </div>
-
-      </div>
-
-      <div class="stat-card">
-
-        <div class="stat-title">
-          Revenue
-        </div>
-
-        <div class="stat-value">
-          {{ dashboardStats().revenue }}
-        </div>
-
-      </div>
-
-      <div class="stat-card">
-
-        <div class="stat-title">
-          Active Sessions
-        </div>
-
-        <div class="stat-value">
-          {{ dashboardStats().sessions }}
-        </div>
-
-      </div>
-
-      <div class="stat-card">
-
-        <div class="stat-title">
-          Conversion Rate
-        </div>
-
-        <div class="stat-value">
-          {{ dashboardStats().conversion }}
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- PROGRESS -->
-
-    <div class="progress-section">
-
-      <div class="progress-card">
-
-        <div class="progress-header">
-
-          <span>
-            Monthly Target
-          </span>
-
-          <span>
-            78%
-          </span>
-
-        </div>
-
-        <div class="progress-bar">
-
-          <div class="progress-fill">
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- MAIN GRID -->
-
-    <div class="dashboard-grid">
-
-      <!-- CHART -->
-
-      <div class="chart-card">
-
-        <h3>
-          Revenue Analytics
-        </h3>
-
-        <div class="chart-wrapper">
-
-          <app-analytics-chart>
-          </app-analytics-chart>
-
-        </div>
-
-      </div>
-
-      <!-- ACTIVITY -->
-
-      <div class="activity-card">
-
-        <h3>
-          Recent Activity
-        </h3>
-
-        @for(
-          activity of activities;
-          track activity.user
-        ) {
-
-          <div class="activity-item">
-
-            <div class="activity-avatar">
-
-              {{ activity.user.charAt(0) }}
-
-            </div>
-
-            <div>
-
-              <div class="activity-user">
-
-                {{ activity.user }}
-
-              </div>
-
-              <div class="activity-action">
-
-                {{ activity.action }}
-
-              </div>
-
-            </div>
-
-          </div>
-
-        }
-
-      </div>
-
-    </div>
-
-    <!-- NOTIFICATIONS -->
-
-    <div class="notification-card">
-
-      <h3>
-        Notifications
-      </h3>
-
-      <div class="notification-item">
-
-        New user registered
-
-      </div>
-
-      <div class="notification-item">
-
-        Server backup completed
-
-      </div>
-
-      <div class="notification-item">
-
-        Revenue increased by 8%
-
-      </div>
+      <div class="skeleton skeleton-growth"></div>
 
     </div>
 
   }
+
+</div>
+
+<div class="progress-section">
+
+  <div class="progress-card">
+
+    <div class="skeleton skeleton-progress"></div>
+
+  </div>
+
+</div>
+
+<div class="dashboard-grid">
+
+  <div class="chart-card">
+
+    <div class="skeleton skeleton-chart-title"></div>
+
+    <div class="skeleton skeleton-chart"></div>
+
+  </div>
+
+  <div class="activity-card">
+
+    <div class="skeleton skeleton-chart-title"></div>
+
+    @for(item of [1,2,3,4]; track item) {
+
+      <div class="activity-item">
+
+        <div class="skeleton skeleton-avatar"></div>
+
+        <div class="activity-content">
+
+          <div class="skeleton skeleton-text"></div>
+
+          <div class="skeleton skeleton-growth"></div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>
+
+
+} @else {
+
+
+<div class="state-grid">
+
+  <div class="stat-card users-card">
+
+    <div class="stat-icon">
+      👥
+    </div>
+
+    <div class="stat-title">
+      Total Users
+    </div>
+
+    <div class="stat-value">
+      {{ totalUsers() }}
+    </div>
+
+  </div>
+
+  <div class="stat-card revenue-card">
+
+    <div class="stat-icon">
+      💰
+    </div>
+
+    <div class="stat-title">
+      Revenue
+    </div>
+
+    <div class="stat-value">
+      {{ dashboardStats().revenue }}
+    </div>
+
+  </div>
+
+  <div class="stat-card sessions-card">
+
+    <div class="stat-icon">
+      📈
+    </div>
+
+    <div class="stat-title">
+      Active Sessions
+    </div>
+
+    <div class="stat-value">
+      {{ dashboardStats().sessions }}
+    </div>
+
+  </div>
+
+  <div class="stat-card conversion-card">
+
+    <div class="stat-icon">
+      🎯
+    </div>
+
+    <div class="stat-title">
+      Conversion Rate
+    </div>
+
+    <div class="stat-value">
+      {{ dashboardStats().conversion }}
+    </div>
+
+  </div>
+
+</div>
+
+<div class="progress-section">
+
+  <div class="progress-card">
+
+    <div class="progress-header">
+
+      <span>
+        Monthly Target
+      </span>
+
+      <span>
+        78%
+      </span>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="dashboard-grid">
+
+  <div class="chart-card">
+
+    <h3>
+      Revenue Analytics
+    </h3>
+
+    <div class="chart-wrapper">
+
+      <app-analytics-chart>
+      </app-analytics-chart>
+
+    </div>
+
+  </div>
+
+  <div class="activity-card">
+
+    <h3>
+      Recent Activity
+    </h3>
+
+    @for(activity of activities; track activity.user) {
+
+      <div class="activity-item">
+
+        <div class="activity-avatar">
+
+          {{ activity.user.charAt(0) }}
+
+        </div>
+
+        <div>
+
+          <div class="activity-user">
+
+            {{ activity.user }}
+
+          </div>
+
+          <div class="activity-action">
+
+            {{ activity.action }}
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>
+
+<div class="notification-card">
+
+  <h3>
+    Notifications
+  </h3>
+
+  <div class="notification-item success">
+
+    🎉 New user registered
+
+  </div>
+
+  <div class="notification-item info">
+
+    💾 Server backup completed
+
+  </div>
+
+  <div class="notification-item warning">
+
+    📈 Revenue increased by 8%
+
+  </div>
+
+</div>
+
+
+}
 
 </div>

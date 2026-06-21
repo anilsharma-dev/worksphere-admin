@@ -145,3 +145,250 @@
 
   transform: scale(0.98);
 }
+/* ================================= */
+/* MODERN USERS PAGE */
+/* ================================= */
+
+.page-wrapper {
+
+padding: 24px;
+
+background:
+linear-gradient(
+180deg,
+var(--background-color),
+rgba(37,99,235,.03)
+);
+}
+
+/* HEADER */
+
+.users-header {
+
+background: var(--card-bg);
+
+border-radius: 24px;
+
+padding: 24px;
+
+box-shadow:
+0 12px 40px rgba(15,23,42,.08);
+
+margin-bottom: 24px;
+}
+
+.users-header h1 {
+
+margin: 0;
+
+font-size: 32px;
+
+font-weight: 700;
+}
+
+.subtitle {
+
+margin-top: 6px;
+
+color: var(--secondary-text);
+
+font-size: 15px;
+}
+
+/* SEARCH */
+
+.search-input {
+
+width: 100%;
+
+max-width: 420px;
+
+padding: 14px 18px;
+
+border-radius: 14px;
+
+border:
+1px solid var(--border-color);
+
+background: var(--card-bg);
+
+transition: .25s;
+}
+
+.search-input:focus {
+
+outline: none;
+
+border-color: #2563eb;
+
+box-shadow:
+0 0 0 4px rgba(37,99,235,.15);
+}
+
+/* ACTION BUTTONS */
+
+.header-actions {
+
+display: flex;
+
+gap: 12px;
+
+flex-wrap: wrap;
+}
+
+.export-btn,
+.sort-btn {
+
+border: none;
+
+border-radius: 14px;
+
+padding: 12px 18px;
+
+cursor: pointer;
+
+font-weight: 600;
+
+transition: .25s;
+}
+
+.export-btn {
+
+background:
+linear-gradient(
+135deg,
+#2563eb,
+#4f46e5
+);
+
+color: white;
+}
+
+.sort-btn {
+
+background: var(--card-bg);
+
+border:
+1px solid var(--border-color);
+}
+
+.export-btn:hover,
+.sort-btn:hover {
+
+transform:
+translateY(-2px);
+
+box-shadow:
+0 10px 20px rgba(15,23,42,.08);
+}
+
+/* ERROR */
+
+.error-banner {
+
+border-radius: 16px;
+
+padding: 16px 18px;
+
+background:
+rgba(239,68,68,.12);
+
+color: #dc2626;
+
+border:
+1px solid rgba(239,68,68,.2);
+
+margin-bottom: 20px;
+}
+
+/* EMPTY STATE */
+
+.empty-state {
+
+background: var(--card-bg);
+
+border-radius: 28px;
+
+padding: 90px 20px;
+
+text-align: center;
+
+box-shadow:
+0 12px 40px rgba(15,23,42,.08);
+}
+
+.empty-state::before {
+
+content: '👥';
+
+display: block;
+
+font-size: 64px;
+
+margin-bottom: 18px;
+}
+
+.empty-state h3 {
+
+font-size: 24px;
+
+margin-bottom: 12px;
+}
+
+.empty-state p {
+
+color: var(--secondary-text);
+
+max-width: 400px;
+
+margin: auto;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+.page-wrapper {
+
+
+padding: 16px;
+
+
+}
+
+.users-header {
+
+
+flex-direction: column;
+
+align-items: flex-start;
+
+
+}
+
+.users-header h1 {
+
+
+font-size: 26px;
+
+
+}
+
+.header-actions {
+
+
+width: 100%;
+
+
+}
+
+.export-btn,
+.sort-btn {
+
+
+flex: 1;
+
+
+}
+
+}
