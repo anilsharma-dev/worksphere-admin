@@ -16,7 +16,7 @@ label {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 8px;
-  color: #334155;
+
 }
 
 small {
@@ -25,9 +25,7 @@ small {
   font-size: 13px;
 }
 
-select {
-  background: var(--card-bg);
-}
+
 
 [mat-dialog-actions] {
   padding-top: 20px;

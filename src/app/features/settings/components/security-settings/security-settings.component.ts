@@ -12,6 +12,7 @@ import {
   Validators
 }
 from '@angular/forms';
+import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-security-settings',
@@ -42,6 +43,8 @@ export class SecuritySettingsComponent {
 
   showConfirmPassword =
     signal(false);
+    private notificationService =
+  inject(NotificationService);
 
   passwordForm =
     this.fb.group({
@@ -113,7 +116,7 @@ export class SecuritySettingsComponent {
       return;
     }
 
-    alert(
+    this.notificationService.success(
       'Password changed successfully'
     );
 

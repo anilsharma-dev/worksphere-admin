@@ -16,6 +16,7 @@ import {
   AuthService
 }
 from '../../../../core/services/auth.service';
+import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-profile-settings',
@@ -40,6 +41,9 @@ export class ProfileSettingsComponent {
 
   private authService =
     inject(AuthService);
+    
+  private notificationService =
+      inject(NotificationService);
 
   currentRole =
     this.authService
@@ -148,9 +152,9 @@ export class ProfileSettingsComponent {
 
     );
 
-    alert(
-      'Profile saved successfully'
-    );
+   this.notificationService.success(
+  'Profile saved successfully'
+);
 
   }
 
