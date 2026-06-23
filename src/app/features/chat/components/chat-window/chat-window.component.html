@@ -4,21 +4,32 @@
 
   <div class="chat-header">
 
-  <h3>
+    <div>
 
-    {{ activeChannel() }}
+      <h3>
 
-  </h3>
+        # {{ activeChannel() }}
 
-  <button
-    class="clear-btn"
-    (click)="clearChat()">
+      </h3>
 
-    Clear Chat
+      <span
+        class="channel-status">
 
-  </button>
+        24 Members Online
 
-</div>
+      </span>
+
+    </div>
+
+    <button
+      class="clear-btn"
+      (click)="clearChat()">
+
+      Clear Chat
+
+    </button>
+
+  </div>
 
   @if(loading()) {
 
@@ -61,29 +72,48 @@
       ) {
 
         <div
-          class="message">
+          class="message-row">
 
           <div
-            class="sender">
-
-            {{ message.sender }}
-
-          </div>
-
-          <div
-            class="text">
-
-            {{ message.text }}
-
-          </div>
-
-          <div
-            class="timestamp">
+            class="avatar">
 
             {{
-              message.timestamp
-              | date:'shortTime'
+              message.sender
+              .charAt(0)
             }}
+
+          </div>
+
+          <div
+            class="message-bubble">
+
+            <div
+              class="sender">
+
+              {{
+                message.sender
+              }}
+
+            </div>
+
+            <div
+              class="text">
+
+              {{
+                message.text
+              }}
+
+            </div>
+
+            <div
+              class="timestamp">
+
+              {{
+                message.timestamp
+                | date:'shortTime'
+              }}
+
+            </div>
 
           </div>
 
@@ -96,7 +126,24 @@
       <div
         class="empty-chat">
 
-        No messages in this channel
+        <div
+          class="empty-icon">
+
+          💬
+
+        </div>
+
+        <h3>
+
+          No Messages Yet
+
+        </h3>
+
+        <p>
+
+          Start the conversation
+
+        </p>
 
       </div>
 
