@@ -1,27 +1,136 @@
-# WorksphereAdmin
+# WorkSphere Admin Dashboard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+Modern Enterprise Admin Dashboard built with Angular 20 using Standalone Components, Signals, Lazy Loading, Route Guards, Role-Based Access Control, Responsive Design, and Dark Mode.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Authentication & Authorization
 
-## Code scaffolding
+* Login Authentication
+* Auth Guard Protection
+* Role-Based Access Control (Admin / Manager / User)
+* 403 Access Denied Page
+* Route Protection
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Dashboard
 
-## Build
+* Revenue Analytics Chart
+* Recent Activity Feed
+* Notifications Panel
+* Monthly Target Progress Tracker
+* Responsive Dashboard Layout
+* Loading Skeletons
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### User Management
 
-## Running unit tests
+* User Listing
+* Search Users
+* Sorting
+* Pagination
+* Add User Modal
+* Edit User Modal
+* Delete User
+* Status Toggle
+* Form Validation
+* CSV Export
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Team Chat
 
-## Running end-to-end tests
+* Channel Based Chat UI
+* Recent Messages
+* Clear Chat Feature
+* Loading States
+* Responsive Chat Layout
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Settings
 
-## Further help
+* Profile Management
+* Profile Photo Upload
+* Role Switcher (Demo)
+* Bio Management
+* Dark / Light Theme Toggle
+* Password Change Section
+* Validation Messages
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### UI/UX
+
+* Modern Enterprise Design
+* Fully Responsive
+* Mobile Optimized
+* Dark Mode Support
+* Reusable Components
+* Loading Skeleton Screens
+* Empty States
+* Success/Error Notifications
+
+## Tech Stack
+
+* Angular 20
+* TypeScript
+* Angular Signals
+* Reactive Forms
+* Angular Router
+* Route Guards
+* SCSS
+* Standalone Components
+
+## Architecture
+
+src/
+├── core/
+│   ├── guards/
+│   ├── services/
+│   └── models/
+│
+├── features/
+│   ├── auth/
+│   ├── dashboard/
+│   ├── users/
+│   ├── chat/
+│   └── settings/
+│
+├── shared/
+│   ├── components/
+│   ├── pipes/
+│   └── directives/
+│
+└── layout/
+
+## Screenshots
+
+* Dashboard
+* User Management
+* Team Chat
+* Settings
+* Dark Mode
+
+## Installation
+
+git clone https://github.com/anilsharma-dev/worksphere-admin.git
+
+npm install
+
+ng serve
+
+
+Navigate to:
+
+http://localhost:4200
+
+
+## Future Enhancements
+
+* JWT Authentication
+* NgRx State Management
+* WebSocket Real-Time Chat
+* API Integration
+* Unit Testing
+* E2E Testing
+* Dashboard Widgets
+* Notification Center
+
+## Author
+
+Anil Sharma
+
+Angular Developer
